@@ -1,0 +1,76 @@
+/* global.css */
+html,
+body {
+    background-color: white;
+    font-family: "Heebo", sans-serif;
+    margin: 0; /* Remove default margin */
+    height: 100%; /* Make sure the body takes the full screen height */
+    display: flex; /* Use flexbox on the body */
+    flex-direction: column; /* Arrange children in a column */
+}
+
+nav {
+  padding-right: 460px;
+  font-weight: 500;
+  font-size: 20px;
+  display: flex;        /* Make it a flex container */
+  justify-content: end; /* Align content to the right */
+}
+ul {
+  list-style: none; /* Remove bullets */
+}
+
+ul li {
+  display: inline-block; /* Make list items horizontal */
+   margin-right: 40px; /* Add space to the right for readability*/
+}
+.black{
+  color:black
+}
+.primary{
+  color:#FF6464;
+}
+.secondary{
+  color: #00A8CC;
+}
+.dark{
+  color: #21243D;
+}
+.light{
+  color: #8695A4;
+}
+.footer {
+   margin-top: auto; /* Push footer to the bottom */
+   /* Add any styling for the footer like height, padding, background */
+   text-align: center;
+}
+h1{
+  font-size: 44px;
+  font-weight: bold;
+}
+p{
+  font-size: 16px;
+}
+.left-content {
+  
+  flex: 1; /* Allow left content to take up available space */
+  padding-right: 50px; /* Add spacing between left and right content */
+}
+
+.right-content {
+  flex: 1; /* Allow right content to take up available space */
+  text-align: left; /* Align the image to the right */
+  padding-right: 460px
+}
+
+img {
+  max-width: 300px; /* Set a maximum width for the image */
+  height: auto; /* Maintain aspect ratio */
+}
+.profile-div{
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 20px; /* Add some padding around the container */
+  padding-left: 460px;
+}
