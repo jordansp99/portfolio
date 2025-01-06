@@ -16,7 +16,7 @@ function Profile() {
 
       </div>
       <div class="right-content">
-      <Avatar alt="photo of Jordan" src="/src/assets/image.png"sx={{ width: 300, height: 300 }} />
+      <Avatar alt="photo of Jordan" src="/src/assets/src/assets/jordanimage.png"sx={{ width: 300, height: 300 }} />
       </div>
     </div>
 
