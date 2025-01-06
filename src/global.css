@@ -3,74 +3,115 @@ html,
 body {
     background-color: white;
     font-family: "Heebo", sans-serif;
-    margin: 0; /* Remove default margin */
-    height: 100%; /* Make sure the body takes the full screen height */
-    display: flex; /* Use flexbox on the body */
-    flex-direction: column; /* Arrange children in a column */
+    margin: 0;
+    min-height: 100vh; /* Use min-height for better mobile handling */
+    display: flex;
+    flex-direction: column;
 }
 
 nav {
-  padding-right: 460px;
-  font-weight: 500;
-  font-size: 20px;
-  display: flex;        /* Make it a flex container */
-  justify-content: end; /* Align content to the right */
-}
-ul {
-  list-style: none; /* Remove bullets */
+    padding: 20px; /* Consistent padding */
+    font-weight: 500;
+    font-size: 1.25rem; /* Use rem for scalable font sizes */
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
 }
 
-ul li {
-  display: inline-block; /* Make list items horizontal */
-   margin-right: 40px; /* Add space to the right for readability*/
+nav ul {
+    list-style: none;
+    padding: 0; /* Remove default ul padding */
+    margin: 0;
+    display: flex;
 }
-.black{
-  color:black
+
+nav ul li {
+    margin-left: 20px; /* Consistent spacing between nav items */
 }
-.primary{
-  color:#FF6464;
+
+nav a { /* Style the links */
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent */
 }
-.secondary{
-  color: #00A8CC;
+
+.black {
+    color: black;
 }
-.dark{
-  color: #21243D;
+
+.primary {
+    color: #FF6464;
 }
-.light{
-  color: #8695A4;
+
+.secondary {
+    color: #00A8CC;
 }
+
+.dark {
+    color: #21243D;
+}
+
+.light {
+    color: #8695A4;
+}
+
 .footer {
-   margin-top: auto; /* Push footer to the bottom */
-   /* Add any styling for the footer like height, padding, background */
-   text-align: center;
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0; /* Add top and bottom padding */
 }
-h1{
-  font-size: 44px;
-  font-weight: bold;
+
+h1 {
+    font-size: 2.75rem; /* Use rem */
+    font-weight: bold;
+    margin-bottom: 1rem; /* Add some spacing below h1 */
 }
-p{
-  font-size: 16px;
+
+p {
+    font-size: 1rem; /* Use rem */
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 1.5rem; /* Consistent spacing */
 }
-.left-content {
-  
-  flex: 1; /* Allow left content to take up available space */
-  padding-right: 50px; /* Add spacing between left and right content */
+
+.profile-div {
+    display: flex;
+    flex-direction: column; /* Stack vertically on smaller screens */
+    align-items: center;
+    padding: 40px 20px; /* Add horizontal padding */
+}
+
+.left-content,
+.right-content {
+    width: 100%; /* Take full width on mobile */
+    max-width: 500px; /* Limit width on larger screens */
+    margin-bottom: 20px; /* Spacing between content on mobile */
+    text-align: center; /* Center text on mobile */
 }
 
 .right-content {
-  flex: 1; /* Allow right content to take up available space */
-  text-align: left; /* Align the image to the right */
-  padding-right: 460px
+    padding: 0; /* Remove unnecessary padding */
 }
 
 img {
-  max-width: 300px; /* Set a maximum width for the image */
-  height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Make image responsive */
+    height: auto;
+    border-radius: 50%; /* Make it a circle */
 }
-.profile-div{
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  padding: 20px; /* Add some padding around the container */
-  padding-left: 460px;
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+    .profile-div {
+        flex-direction: row; /* Go back to horizontal layout */
+        justify-content: space-around;
+        align-items: flex-start; /* Align items to the top */
+    }
+
+    .left-content,
+    .right-content {
+        width: 45%; /* Give each content area some width */
+        text-align: left;
+        margin-bottom: 0; /* Remove bottom margin */
+    }
+
+    nav {
+      padding: 20px 40px; /* More padding on larger screens */
+    }
 }
