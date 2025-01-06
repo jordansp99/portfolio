@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Avatar}from '@mui/material';
+import jordanImage from './assets/jordanimage.png'; // Import the image
 function Profile() {
   return (
   <>
@@ -15,8 +16,8 @@ function Profile() {
           </Button>
 
       </div>
-      <div class="right-content">
-      <Avatar alt="photo of Jordan" src="/src/assets/src/assets/jordanimage.png"sx={{ width: 300, height: 300 }} />
+      <div className="right-content">
+      <Avatar alt="photo of Jordan" src={jordanImage} sx={{ width: 300, height: 300 }} />
       </div>
     </div>
 
