@@ -6,8 +6,12 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className='footer'>
-    <LinkedInIcon fontSize="large"></LinkedInIcon>
-    <GitHubIcon fontSize="large"></GitHubIcon>
+    <LinkedInIcon sx={{ 
+                color: '#21243D', 
+              }}fontSize="large"></LinkedInIcon>
+    <GitHubIcon               sx={{ 
+                color: '#21243D', 
+              }} fontSize="large"></GitHubIcon>
       <p>© {currentYear} All rights reserved</p>
     </footer>
   )
