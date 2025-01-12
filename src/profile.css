@@ -4,8 +4,10 @@
 .container{
     max-width: 860px;
     margin: 0 auto;
+    background-color: red;
 }
+
 .promo_row{
     display:flex;
-
+    gap: 25px;
 }
