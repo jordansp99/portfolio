@@ -22,7 +22,7 @@ function Profile() {
             </Button>
           </div>
           <div className="promo_column"> 
-            <Avatar alt="photo of Jordan" src=".assets/jordanImage.png" sx={{ width: 300, height: 300 }} />
+            <Avatar alt="photo of Jordan" src="./assets/jordanImage.png" sx={{ width: 300, height: 300 }} />
           </div>
         </div>
         </div>
