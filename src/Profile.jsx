@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Avatar } from '@mui/material';
-import jordanImage from './assets/jordanImage.png'
+import jordanImage from '/assets/jordanImage.png'
 
 import './profile.css'; // Import the CSS file
 
