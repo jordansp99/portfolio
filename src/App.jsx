@@ -1,6 +1,7 @@
 import Profile from "./Profile"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
+import RecentPosts from "./RecentPosts"
 
 function App() {
 
@@ -8,7 +9,9 @@ function App() {
     <>
     <Navbar></Navbar>
     <Profile></Profile>
+    <RecentPosts></RecentPosts>
     <Footer></Footer>
+
     </>
   )
 }
