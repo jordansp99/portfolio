@@ -1,0 +1,11 @@
+.promo {
+    padding: 100px 20px 58px;
+}
+.container{
+    max-width: 860px;
+    margin: 0 auto;
+}
+.promo_row{
+    display:flex;
+
+}

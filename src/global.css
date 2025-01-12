@@ -11,6 +11,7 @@ body {
 
 nav {
     padding: 20px;
+    padding-right: 50px;
     font-weight: 500;
     font-size: 1.25rem;
     display: flex;
@@ -71,55 +72,3 @@ p {
     margin-bottom: 1.5rem;
 }
 
-.profile-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    margin: 0 40px; /* Add margin to the left and right */
-}
-
-.left-content {
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.right-content {
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-
-/* Media query for larger screens */
-@media (min-width: 768px) {
-    .profile-div {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 80px;
-        margin: 0 100px; /* Increased margin for larger screens */
-    }
-
-    .left-content {
-        width: auto;
-        max-width: none;
-        text-align: left;
-        margin-bottom: 0;
-    }
-
-    .right-content {
-        width: auto;
-        justify-content: flex-start;
-        margin-bottom: 0;
-    }
-}
