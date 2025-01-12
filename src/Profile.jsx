@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Avatar } from '@mui/material';
-import '/src/Profile.css'; // Import the CSS file
+import jordanImage from './assets/jordanImage.png'
+
+import './profile.css'; // Import the CSS file
 
 function Profile() {
   return (
@@ -22,7 +24,7 @@ function Profile() {
             </Button>
           </div>
           <div className="promo_column"> 
-            <Avatar alt="photo of Jordan" src="./assets/jordanImage.png" sx={{ width: 300, height: 300 }} />
+            <Avatar alt="photo of Jordan" src={jordanImage} sx={{ width: 300, height: 300 }} />
           </div>
         </div>
         </div>
