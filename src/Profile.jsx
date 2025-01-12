@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Avatar } from '@mui/material';
-import './Profile.css'; // Import the CSS file
+import '/src/Profile.css'; // Import the CSS file
 
 function Profile() {
   return (
