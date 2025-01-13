@@ -19,7 +19,7 @@ const theme = createTheme({
     },
     background: {
       default: 'white', // A light grey for background
-      paper: '#ffffff', // White for cards and dialogs
+      paper: '#EDF7FA', // White for cards and dialogs
     },
   },
   typography: {
