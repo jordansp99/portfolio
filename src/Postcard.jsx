@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Stack } from '@mui/material';
 
 function PostCard({ title, date, category, description }) {
   return (
-    <Card sx={{ flex: 1, backgroundColor:"background.paper" }}>
+    <Card sx={{ flex: 1, backgroundColor:"background.default" }}>
       <CardContent>
         <Typography variant="h6" fontWeight="bold" gutterBottom>
           {title}
