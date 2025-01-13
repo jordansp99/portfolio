@@ -1,10 +1,11 @@
 import React from 'react'
 import './recentposts.css'
+import { Typography } from '@mui/material'
 function RecentPosts() {
   return (
     <section>
     <div className='container2'>
-    <p>test</p>
+    <Typography>Recent posts</Typography>
     </div>
     </section>
   )

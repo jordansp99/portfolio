@@ -14,10 +14,8 @@ function Profile() {
             <Button 
               size="large" 
               variant="contained" 
-              sx={{ 
-                backgroundColor: '#C44536', 
-                color: 'white', 
-              }}
+              color='primary'
+              sx={{ color: 'white' }}
             >
               Download CV
             </Button>
