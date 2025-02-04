@@ -1,60 +1,66 @@
 import React from 'react';
-import { Box, Typography,  Link } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 import PostCard from './Postcard.jsx';
+import frontMatter from 'front-matter'; // Make sure you have this installed: npm install front-matter
+
+// Import all Markdown files using import.meta.glob
+const postModules = import.meta.glob('../posts/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true, // Important for Vite - loads modules at build time
+});
+
+// Process the Markdown files and create the posts array
+const posts = Object.entries(postModules).map(([path, content]) => {
+  const slug = path.split('/').pop().replace('.md', '');
+  const { attributes, body } = frontMatter(content);
+  return {
+    slug,
+    ...attributes,
+    content: body, // If you need the Markdown content later
+    image: attributes.image || null,
+  };
+}).sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date (newest first)
+
 
 function RecentPosts() {
-  const posts = [
-    {
-      id: 1,
-      title: 'Making a design system from scratch',
-      date: '12 Feb 2020',
-      category: 'Design, Pattern',
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-    },
-    {
-      id: 2,
-      title: 'Creating pixel perfect icons in Figma',
-      date: '12 Feb 2020',
-      category: 'Figma, Icon Design',
-      description:
-        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-    },
-  ];
 
   return (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: 'background.paper', // Example
-          }}
-        >
-        <Box sx={{
-        maxWidth: '860px', // Set the maximum width of the box
-        padding:'70px 20px 58px',
-      }}>
-        {/* Header */}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: 'background.paper',
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: '860px',
+          padding: '70px 20px 58px',
+        }}
+      >
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-            <Typography variant="h5" fontWeight="bold">
-                Recent posts
-            </Typography>
-           <Link underline="hover" color="secondary">View all</Link>
+          <Typography variant="h5" fontWeight="bold">
+            Recent posts
+          </Typography>
+          <Link underline="hover" color="secondary">
+            View all
+          </Link>
         </Box>
 
-            {/* Post Cards Container */}
-            <Box display="flex" gap={2}>
-            {posts.map((post) => (
-                <PostCard
-                key={post.id}
-                title={post.title}
-                date={post.date}
-                category={post.category}
-                description={post.description}
-                />
-                ))}
-            </Box>
+        <Box display="flex" flexWrap="wrap" gap={2}>
+          {posts.map((post) => (
+            <PostCard
+              key={post.slug}
+              title={post.title}
+              date={post.date}
+              category={post.category}
+              description={post.description}
+              image={post.image} // Pass the image to PostCard
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );
