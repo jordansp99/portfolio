@@ -38,6 +38,9 @@ function RecentPosts() {
   // Get the most recent two posts for the homepage
   const recentPosts = posts.slice(0, 2);
   
+  // Get total number of posts
+  const totalPosts = posts.length;
+  
   const handlePostClick = (post) => {
     setSelectedPost(post);
     setOpenDialog(true);
@@ -104,7 +107,7 @@ function RecentPosts() {
                 transition: 'all 0.3s ease'
               }}
             >
-              View All
+              View All ({totalPosts})
             </Button>
           </Box>
 

@@ -83,7 +83,7 @@ function AllPosts() {
                 fontSize: { xs: '1.75rem', md: '2.25rem' }
               }}
             >
-              All Posts
+              All Posts ({posts.length})
             </Typography>
             <Button 
               variant="outlined" 
