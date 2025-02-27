@@ -66,6 +66,8 @@ function Profile() {
               size="large" 
               variant="contained" 
               color='primary'
+              href={`${import.meta.env.BASE_URL}assets/jordan_cv.pdf`}
+              download
               sx={{ 
                 color: 'white',
                 borderRadius: '4px',
@@ -74,7 +76,7 @@ function Profile() {
                 fontSize: '1rem'
               }}
             >
-              Download Resume
+              Download CV
             </Button>
           </Box>
           

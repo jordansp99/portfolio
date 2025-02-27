@@ -1,7 +1,9 @@
-import React from 'react';
-import { Box, Typography, IconButton, Container, Paper, Chip, Divider, Fade } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, IconButton, Container, Chip, Divider, Tooltip, Alert } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CheckIcon from '@mui/icons-material/Check';
 import moment from 'moment';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -10,8 +12,31 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Custom code renderer for ReactMarkdown
 const CodeBlock = ({ node, inline, className, children, ...props }) => {
+  const [copied, setCopied] = useState(false);
+  
   const match = /language-(\w+)/.exec(className || '');
   const language = match ? match[1] : '';
+  
+  const handleCopy = (e) => {
+    // Prevent event propagation
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Get only the code content without any formatting
+    const code = String(children).replace(/\n$/, '');
+    
+    try {
+      navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+    
+    return false;
+  };
   
   if (inline) {
     return (
@@ -42,25 +67,69 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
       }}
     >
-      {language && (
-        <Typography 
-          variant="caption" 
+      <Box sx={{ 
+        position: 'absolute', 
+        top: 0, 
+        left: 0,
+        right: 0,
+        zIndex: 2, 
+        display: 'flex', 
+        justifyContent: 'space-between',
+        alignItems: 'center', 
+        p: 0.5,
+        bgcolor: 'rgba(0,0,0,0.7)'
+      }}>
+        {language && (
+          <Typography 
+            variant="caption" 
+            sx={{ 
+              color: 'white',
+              px: 2,
+              py: 0.5,
+              fontFamily: 'monospace',
+              fontSize: '0.75rem'
+            }}
+          >
+            {language}
+          </Typography>
+        )}
+        <Tooltip title="Copy code" placement="left">
+          <IconButton 
+            size="small" 
+            onClick={handleCopy}
+            sx={{ 
+              color: 'white',
+              '&:hover': { 
+                bgcolor: 'rgba(255,255,255,0.1)' 
+              },
+              width: 30,
+              height: 30,
+              minWidth: 30
+            }}
+          >
+            {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
+          </IconButton>
+        </Tooltip>
+      </Box>
+      {copied && (
+        <Box 
           sx={{ 
             position: 'absolute',
-            top: 0,
-            right: 0,
-            bgcolor: 'rgba(0,0,0,0.7)',
+            bottom: 8,
+            right: 8,
+            zIndex: 3,
+            borderRadius: 1,
+            bgcolor: 'success.light',
             color: 'white',
             px: 2,
             py: 0.5,
-            borderBottomLeftRadius: '8px',
-            zIndex: 1,
-            fontFamily: 'monospace',
-            fontSize: '0.75rem'
+            fontSize: '0.75rem',
+            fontWeight: 'medium',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
           }}
         >
-          {language}
-        </Typography>
+          Copied!
+        </Box>
       )}
       <SyntaxHighlighter
         language={language || 'text'}
@@ -68,6 +137,7 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
         customStyle={{
           margin: 0,
           padding: '16px',
+          paddingTop: '40px',
           borderRadius: '8px',
           fontSize: '0.9rem',
           lineHeight: 1.5,

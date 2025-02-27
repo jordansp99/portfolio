@@ -1,6 +1,6 @@
 ---
 title: Simple Data Analysis with Pandas - Exploring a Dataset
-date: 2023-11-15
+date: 2025-01-01
 category: Data Science, Python
 description: Learn how to perform basic data analysis using Pandas, a powerful Python library for data manipulation and analysis.
 ---
