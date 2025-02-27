@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Box, Typography, Button, Dialog, Slide, Container, Grid, Fade } from '@mui/material';
 import PostCard from './Postcard.jsx';
 import PostView from './PostView.jsx';
-import frontMatter from 'front-matter';
 import { useNavigate } from 'react-router-dom';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import frontMatter from 'front-matter';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Import all Markdown files using import.meta.glob
 const postModules = import.meta.glob('../posts/*.md', {
   query: '?raw',
   import: 'default',
-  eager: true, // Important for Vite - loads modules at build time
+  eager: true,
 });
 
 // Process the Markdown files and create the posts array
@@ -20,23 +20,20 @@ const posts = Object.entries(postModules).map(([path, content]) => {
   return {
     slug,
     ...attributes,
-    content: body, // If you need the Markdown content later
+    content: body,
     image: attributes.image || null,
   };
-}).sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date (newest first)
+}).sort((a, b) => new Date(b.date) - new Date(a.date));
 
 // Transition for the dialog
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function RecentPosts() {
+function AllPosts() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
-  
-  // Get the most recent two posts for the homepage
-  const recentPosts = posts.slice(0, 2);
   
   const handlePostClick = (post) => {
     setSelectedPost(post);
@@ -47,8 +44,8 @@ function RecentPosts() {
     setOpenDialog(false);
   };
   
-  const handleViewAllPosts = () => {
-    navigate('/all-posts');
+  const handleBackToHome = () => {
+    navigate('/');
   };
 
   return (
@@ -57,7 +54,7 @@ function RecentPosts() {
         sx={{
           backgroundColor: 'background.paper',
           py: { xs: 4, md: 6 },
-          mt: { xs: 0, md: 0 },
+          minHeight: '100vh',
           px: { xs: 3, md: 5 }
         }}
       >
@@ -86,13 +83,13 @@ function RecentPosts() {
                 fontSize: { xs: '1.75rem', md: '2.25rem' }
               }}
             >
-              Recent Posts
+              All Posts
             </Typography>
             <Button 
               variant="outlined" 
               color="primary" 
-              onClick={handleViewAllPosts}
-              endIcon={<ArrowForwardIcon />}
+              onClick={handleBackToHome}
+              startIcon={<ArrowBackIcon />}
               sx={{ 
                 borderRadius: '24px',
                 px: { xs: 2, md: 3 },
@@ -104,14 +101,14 @@ function RecentPosts() {
                 transition: 'all 0.3s ease'
               }}
             >
-              View All
+              Back to Home
             </Button>
           </Box>
 
           <Grid container spacing={4}>
-            {recentPosts.length > 0 ? (
-              recentPosts.map((post) => (
-                <Grid item xs={12} sm={6} key={post.slug}>
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <Grid item xs={12} sm={6} md={4} key={post.slug}>
                   <Box 
                     sx={{ 
                       height: '100%',
@@ -166,4 +163,4 @@ function RecentPosts() {
   );
 }
 
-export default RecentPosts;
+export default AllPosts;
