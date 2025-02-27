@@ -46,7 +46,7 @@ function Profile() {
                 mb: 2
               }}
             >
-              Hi, I am Jordan,<br />Junior Data Scientist
+              Hi, I am Jordan,<br /> Data Scientist
             </Typography>
             
             <Typography 
@@ -59,7 +59,7 @@ function Profile() {
                 mx: { xs: 'auto', md: 0 }
               }}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto praesentium maiores, delectus dolor impedit, minus perferendis dolore ab quaerat sequi vero iste dignissimos rem, eos non deleniti consequatur corrupti. Aspernatur.
+            I specialise in leveraging data science to unlock the potential of human language, with a strong focus on NLP, LLMs, and ASR technologies.
             </Typography>
             
             <Button 
