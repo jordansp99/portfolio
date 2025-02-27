@@ -45,7 +45,7 @@ function AllPosts() {
   };
   
   const handleBackToHome = () => {
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

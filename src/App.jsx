@@ -5,7 +5,7 @@ import RecentPosts from "./RecentPosts";
 import AllPosts from "./AllPosts";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 // 1. Define your custom theme
 const theme = createTheme({
@@ -41,7 +41,7 @@ function HomePage() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
@@ -50,7 +50,7 @@ function App() {
         </Routes>
         <Footer />
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

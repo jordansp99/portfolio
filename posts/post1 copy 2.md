@@ -1,6 +1,6 @@
 ---
 title: My Amazing Blog Post
-date: 2023-08-28
+date: 2025-01-01
 category: Technology, JavaScript
 description: This is a detailed description of my very first blog post using frontmatter.
 ---

@@ -48,7 +48,7 @@ function RecentPosts() {
   };
   
   const handleViewAllPosts = () => {
-    navigate('/all-posts');
+    navigate('/all-posts', { replace: true });
   };
 
   return (
