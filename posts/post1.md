@@ -1,37 +1,59 @@
 ---
-title: Building a Simple To-Do List with Vanilla JavaScript
-date: 2023-10-27
-category: Technology, JavaScript, Web Development
-description: Learn how to create a basic to-do list application using only vanilla JavaScript, HTML, and CSS.
+title: Simple Data Analysis with Pandas - Exploring a Dataset
+date: 2023-11-15
+category: Data Science, Python,
+description: Learn how to perform basic data analysis using Pandas, a powerful Python library for data manipulation and analysis.
 ---
 
-# Building a Simple To-Do List with Vanilla JavaScript
+# Simple Data Analysis with Pandas: Exploring a Dataset
 
-In this post, we'll walk through the process of creating a simple to-do list application using only vanilla JavaScript, HTML, and CSS. This project is a great way to solidify your understanding of DOM manipulation and event handling.
+In this post, we'll walk through the process of performing basic data analysis using Pandas, a powerful Python library for data manipulation and analysis. We'll load a sample dataset and explore its contents.
 
-## HTML Structure
+## Setting up the Environment
 
-First, let's set up our HTML structure:
+First, make sure you have Pandas installed. If not, you can install it using pip:
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>To-Do List</h1>
-        <div class="input-container">
-            <input type="text" id="taskInput" placeholder="Add a new task...">
-            <button id="addButton">Add</button>
-        </div>
-        <ul id="taskList"></ul>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+```python
+import pandas as pd
+
+# Load the dataset (replace 'data.csv' with your dataset's file path)
+try:
+    df = pd.read_csv('data.csv')
+except FileNotFoundError:
+    print("Error: data.csv not found. Please ensure the file is in the correct directory.")
+    exit()
+
+# Display the first 5 rows of the DataFrame
+print("First 5 rows of the DataFrame:")
+print(df.head())
+
+# Display basic information about the DataFrame
+print("\nDataFrame Information:")
+print(df.info())
+
+# Display summary statistics of numerical columns
+print("\nSummary Statistics:")
+print(df.describe())
+
+# Display the unique values of a categorical column (replace 'category_column' with your column name)
+if 'category_column' in df.columns:
+    print("\nUnique values in 'category_column':")
+    print(df['category_column'].unique())
+else:
+    print("\nColumn 'category_column' not found. Please replace with an existing column name.")
+
+# Example: calculate the mean of a numerical column (replace 'numerical_column' with your column name)
+if 'numerical_column' in df.columns:
+    mean_value = df['numerical_column'].mean()
+    print(f"\nMean of 'numerical_column': {mean_value}")
+else:
+    print("\nColumn 'numerical_column' not found. Please replace with an existing column name.")
+
+#Example: filter data based on a condition
+if 'numerical_column' in df.columns:
+    filtered_df = df[df['numerical_column'] > 50]
+    print("\nFiltered data (numerical_column > 50):")
+    print(filtered_df.head())
+else:
+    print("\nColumn 'numerical_column' not found. Please replace with an existing column name.")
 ```
