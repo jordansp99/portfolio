@@ -28,14 +28,14 @@ const Projects: React.FC = () => {
 
             <div className="space-y-4 flex flex-col items-start">
               <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                <Link to={`/projects/${project.id}`} className="hover:opacity-70 transition-opacity">
+                <Link to={`/projects/${project.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
                   {project.title}
                 </Link>
               </h2>
               <p className="text-neutral-600 leading-relaxed max-w-2xl">{project.description}</p>
               <Link
                 to={`/projects/${project.id}`}
-                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
+                className="font-mono text-xs uppercase tracking-wide text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
               >
                 View Case Study
               </Link>

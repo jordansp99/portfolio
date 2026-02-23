@@ -62,10 +62,10 @@ const Home: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Explore</p>
         <div className="flex flex-col sm:flex-row gap-6 text-xl">
-          <Link to="/projects" className="underline underline-offset-4 hover:opacity-70 transition-opacity">
+          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Projects
           </Link>
-          <Link to="/blog" className="underline underline-offset-4 hover:opacity-70 transition-opacity">
+          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Blog
           </Link>
         </div>
