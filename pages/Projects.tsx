@@ -1,100 +1,93 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROJECTS } from '../constants';
-import { Filter, ArrowRight } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedTag = searchParams.get('tag');
 
-  const filteredProjects = selectedTag 
-    ? PROJECTS.filter(p => p.tags.includes(selectedTag))
-    : PROJECTS;
+  const filteredProjects = selectedTag ? PROJECTS.filter((p) => p.tags.includes(selectedTag)) : PROJECTS;
 
   return (
-    <div className="space-y-16">
-      <header className="space-y-6 pt-8 bg-white p-8 rounded-3xl shadow-sm">
-        <h1 className="text-5xl md:text-7xl font-medium tracking-tighter text-gray-900">Projects</h1>
-        <p className="text-xl text-gray-500 max-w-2xl leading-relaxed font-light">
-          A collection of systems I've built, ranging from security wrappers for LLMs to high-performance vision pipelines.
+    <div className="space-y-10 pb-16">
+      <header className="border-b border-[#ddd8cf] pb-7 pt-2 md:pt-4">
+        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Projects</p>
+        <h1 className="mt-3 text-4xl md:text-6xl tracking-tight">Selected Work</h1>
+        <p className="mt-4 text-neutral-600 max-w-2xl leading-relaxed">
+          A concise set of projects focused on practical language AI, evaluation, and production reliability.
         </p>
-        
-        <div className="flex items-center gap-3 pt-4">
-           <Filter size={16} className="text-gray-400" />
-           {selectedTag ? (
-             <>
-               <span className="text-sm font-mono text-gray-500">Filtered by:</span>
-               <span className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-mono font-bold uppercase tracking-wider">{selectedTag}</span>
-               <button 
-                  onClick={() => setSearchParams({})}
-                  className="text-xs font-mono text-gray-400 hover:text-gray-900 transition-colors border-b border-gray-300 hover:border-gray-900 ml-2"
-               >
-                  CLEAR_FILTER
-               </button>
-             </>
-           ) : (
-             <span className="text-sm font-mono text-gray-400 italic">No active filters</span>
-           )}
+
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <span className="font-mono text-xs uppercase tracking-wide text-neutral-500">Filter</span>
+          {selectedTag ? (
+            <>
+              <span className="font-mono text-xs uppercase tracking-wide px-2 py-1 border border-neutral-900">{selectedTag}</span>
+              <button
+                onClick={() => setSearchParams({})}
+                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
+              >
+                Clear
+              </button>
+            </>
+          ) : (
+            <span className="text-sm text-neutral-500">No active filters</span>
+          )}
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-16">
+      <div className="space-y-8">
         {filteredProjects.map((project, index) => (
-          <div 
-            key={project.id} 
-            className="group flex flex-col md:flex-row gap-8 md:gap-12 items-center"
+          <article
+            key={project.id}
+            className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8"
           >
-            <div className={`md:w-3/5 overflow-hidden rounded-2xl border border-gray-200 shadow-sm relative ${index % 2 === 1 ? 'md:order-2' : ''}`}>
-              <div className="absolute inset-0 bg-indigo-900/0 group-hover:bg-indigo-900/10 transition-colors duration-500 z-10 pointer-events-none"></div>
-              <img 
-                src={project.imageUrl} 
-                className="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt={project.title}
-              />
-            </div>
-            <div className={`md:w-2/5 flex flex-col justify-center space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-gray-100 ${index % 2 === 1 ? 'md:order-1 md:text-right md:items-end' : ''}`}>
-              <div className={`flex flex-wrap gap-2 ${index % 2 === 1 ? 'justify-end' : ''}`}>
-                {project.tags.map(tag => (
-                  <button 
-                    key={tag} 
+            <div className="space-y-3 pt-1">
+              <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Project {String(index + 1).padStart(2, '0')}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <button
+                    key={tag}
                     onClick={() => setSearchParams(selectedTag === tag ? {} : { tag })}
-                    className={`px-2 py-1 rounded text-[10px] font-mono uppercase tracking-widest transition-all border ${
-                      selectedTag === tag 
-                        ? 'bg-gray-900 text-white border-gray-900' 
-                        : 'bg-white text-gray-500 border-gray-200 hover:border-indigo-400 hover:text-indigo-600'
+                    className={`font-mono text-[11px] uppercase tracking-wide px-2 py-1 border transition-colors ${
+                      selectedTag === tag
+                        ? 'border-neutral-900 bg-neutral-900 text-[#f6f5f2]'
+                        : 'border-[#d9d5cd] text-neutral-600 hover:border-neutral-900 hover:text-neutral-900'
                     }`}
                   >
                     {tag}
                   </button>
                 ))}
               </div>
-              <h2 className="text-4xl font-medium tracking-tight text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">
-                <Link to={`/projects/${project.id}`}>{project.title}</Link>
+            </div>
+
+            <div className="space-y-4 md:text-right md:items-end flex flex-col">
+              <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
+                <Link to={`/projects/${project.id}`} className="hover:opacity-70 transition-opacity">
+                  {project.title}
+                </Link>
               </h2>
-              <p className="text-lg text-gray-500 leading-relaxed font-light">
-                {project.description}
-              </p>
-              <Link 
-                to={`/projects/${project.id}`} 
-                className={`inline-flex items-center gap-2 text-sm font-mono font-bold uppercase tracking-widest text-gray-900 hover:text-indigo-600 transition-colors w-fit group/link ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}
+              <p className="text-neutral-600 leading-relaxed max-w-2xl md:ml-auto">{project.description}</p>
+              <Link
+                to={`/projects/${project.id}`}
+                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
               >
-                View Case Study <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
+                View Case Study
               </Link>
             </div>
-          </div>
+          </article>
         ))}
       </div>
-      
+
       {filteredProjects.length === 0 && (
-         <div className="text-center py-32 bg-white/50 border border-dashed border-gray-300 rounded-3xl backdrop-blur-sm">
-            <p className="text-lg font-mono text-gray-400 mb-6">NULL_RESULT: No projects found with tag "{selectedTag}"</p>
-            <button 
-              onClick={() => setSearchParams({})}
-              className="px-8 py-3 bg-gray-900 text-white rounded-full text-sm font-mono font-bold hover:bg-indigo-600 transition-colors shadow-lg shadow-indigo-200"
-            >
-              RESET_FILTERS
-            </button>
-         </div>
+        <div className="border border-dashed border-[#d4cfc6] p-10 text-center">
+          <p className="text-neutral-600">No projects found for tag "{selectedTag}".</p>
+          <button
+            onClick={() => setSearchParams({})}
+            className="mt-4 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
+          >
+            Reset Filters
+          </button>
+        </div>
       )}
     </div>
   );
