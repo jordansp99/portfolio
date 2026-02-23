@@ -35,44 +35,63 @@ const Blog: React.FC = () => {
         </div>
       </header>
 
-      <div className="space-y-8">
-        {filteredPosts.map((post) => (
-          <article key={post.id} className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8">
-            <div className="space-y-3 pt-1">
-              <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">{post.date}</p>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => setSearchParams(selectedTag === tag ? {} : { tag })}
-                    className={`font-mono text-[11px] uppercase tracking-wide px-2 py-1 border transition-colors ${
-                      selectedTag === tag
-                        ? 'border-neutral-900 bg-neutral-900 text-[#f6f5f2]'
-                        : 'border-[#d9d5cd] text-neutral-600 hover:border-neutral-900 hover:text-neutral-900'
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                ))}
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_260px] gap-10 xl:gap-12">
+        <div className="space-y-8">
+          {filteredPosts.map((post, index) => (
+            <article key={post.id} className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8">
+              <div className="space-y-3 pt-1">
+                <p className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">
+                  <span className="text-neutral-700">{String(index + 1).padStart(2, '0')}</span> Post
+                </p>
+                <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">{post.date}</p>
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => setSearchParams(selectedTag === tag ? {} : { tag })}
+                      className={`font-mono text-[11px] uppercase tracking-wide px-2 py-1 border transition-colors ${
+                        selectedTag === tag
+                          ? 'border-neutral-900 bg-neutral-900 text-[#f6f5f2]'
+                          : 'border-[#d9d5cd] text-neutral-600 hover:border-neutral-900 hover:text-neutral-900'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-4 md:text-right md:items-end flex flex-col">
-              <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                <Link to={`/blog/${post.id}`} className="hover:opacity-70 transition-opacity">
-                  {post.title}
+              <div className="space-y-4 flex flex-col items-start">
+                <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
+                  <Link to={`/blog/${post.id}`} className="hover:opacity-70 transition-opacity">
+                    {post.title}
+                  </Link>
+                </h2>
+                <p className="text-neutral-600 leading-relaxed max-w-2xl">{post.excerpt}</p>
+                <Link
+                  to={`/blog/${post.id}`}
+                  className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
+                >
+                  Read Post
                 </Link>
-              </h2>
-              <p className="text-neutral-600 leading-relaxed max-w-2xl md:ml-auto">{post.excerpt}</p>
-              <Link
-                to={`/blog/${post.id}`}
-                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
-              >
-                Read Post
-              </Link>
-            </div>
-          </article>
-        ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <aside className="hidden xl:block">
+          <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
+            <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Blog Headings</p>
+            <ol className="mt-4 space-y-3">
+              {filteredPosts.map((post, index) => (
+                <li key={post.id} className="flex gap-3 leading-snug">
+                  <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="text-sm text-neutral-800">{post.title}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </aside>
       </div>
 
       {filteredPosts.length === 0 && (

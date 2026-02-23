@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import avatarImage from '../src/assets/avatar.jpg';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -16,6 +17,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div className="min-h-screen bg-[#f6f5f2] text-neutral-900 selection:bg-neutral-900 selection:text-[#f6f5f2]">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12 grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] gap-10 md:gap-12">
         <aside className="md:sticky md:top-10 md:self-start border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
+          <div className="mb-5 overflow-hidden border border-[#d7d2c9] bg-[#efebe3]">
+            <img
+              src={avatarImage}
+              alt="Abstract profile"
+              className="w-full h-28 object-cover grayscale contrast-125 saturate-75 opacity-90"
+            />
+          </div>
+
           <div className="flex items-center justify-between md:block">
             <Link to="/" className="text-lg tracking-tight font-medium hover:opacity-70 transition-opacity">
               Jordan Speight
@@ -29,7 +38,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
           </div>
 
-          <p className="mt-2 text-sm text-neutral-600">AI Engineer</p>
+          <p className="mt-2 text-sm text-neutral-600">Data Scientist</p>
 
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex mt-5 flex-col gap-2`}>
             {navLinks.map((link) => (
