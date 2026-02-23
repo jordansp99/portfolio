@@ -5,8 +5,18 @@ import { BLOG_POSTS } from '../constants';
 const Blog: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedTag = searchParams.get('tag');
+  const [query, setQuery] = React.useState('');
 
-  const filteredPosts = selectedTag ? BLOG_POSTS.filter((p) => p.tags.includes(selectedTag)) : BLOG_POSTS;
+  const filteredPosts = BLOG_POSTS.filter((post) => {
+    const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true;
+    const q = query.trim().toLowerCase();
+    const matchesQuery =
+      q.length === 0 ||
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(q));
+    return matchesTag && matchesQuery;
+  });
 
   return (
     <div className="space-y-10 pb-16">
@@ -32,6 +42,20 @@ const Blog: React.FC = () => {
           ) : (
             <span className="text-sm text-neutral-500">No active filters</span>
           )}
+        </div>
+
+        <div className="mt-5">
+          <label htmlFor="blog-search" className="font-mono text-xs uppercase tracking-wide text-neutral-500">
+            Search
+          </label>
+          <input
+            id="blog-search"
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search posts by title, excerpt, or tag"
+            className="mt-2 w-full max-w-xl border border-[#d8d3cb] bg-[#fbfaf7] px-3 py-2 text-sm text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900"
+          />
         </div>
       </header>
 
@@ -96,7 +120,10 @@ const Blog: React.FC = () => {
 
       {filteredPosts.length === 0 && (
         <div className="border border-dashed border-[#d4cfc6] p-10 text-center">
-          <p className="text-neutral-600">No posts found for tag "{selectedTag}".</p>
+          <p className="text-neutral-600">
+            No posts found{selectedTag ? ` for tag "${selectedTag}"` : ''}.
+          </p>
+          {query.trim() && <p className="mt-2 text-neutral-500">Search: "{query.trim()}"</p>}
           <button
             onClick={() => setSearchParams({})}
             className="mt-4 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"

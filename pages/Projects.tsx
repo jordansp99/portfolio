@@ -5,8 +5,18 @@ import { PROJECTS } from '../constants';
 const Projects: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedTag = searchParams.get('tag');
+  const [query, setQuery] = React.useState('');
 
-  const filteredProjects = selectedTag ? PROJECTS.filter((p) => p.tags.includes(selectedTag)) : PROJECTS;
+  const filteredProjects = PROJECTS.filter((project) => {
+    const matchesTag = selectedTag ? project.tags.includes(selectedTag) : true;
+    const q = query.trim().toLowerCase();
+    const matchesQuery =
+      q.length === 0 ||
+      project.title.toLowerCase().includes(q) ||
+      project.description.toLowerCase().includes(q) ||
+      project.tags.some((tag) => tag.toLowerCase().includes(q));
+    return matchesTag && matchesQuery;
+  });
 
   return (
     <div className="space-y-10 pb-16">
@@ -32,6 +42,20 @@ const Projects: React.FC = () => {
           ) : (
             <span className="text-sm text-neutral-500">No active filters</span>
           )}
+        </div>
+
+        <div className="mt-5">
+          <label htmlFor="project-search" className="font-mono text-xs uppercase tracking-wide text-neutral-500">
+            Search
+          </label>
+          <input
+            id="project-search"
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search projects by title, description, or tag"
+            className="mt-2 w-full max-w-xl border border-[#d8d3cb] bg-[#fbfaf7] px-3 py-2 text-sm text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900"
+          />
         </div>
       </header>
 
@@ -98,7 +122,10 @@ const Projects: React.FC = () => {
 
       {filteredProjects.length === 0 && (
         <div className="border border-dashed border-[#d4cfc6] p-10 text-center">
-          <p className="text-neutral-600">No projects found for tag "{selectedTag}".</p>
+          <p className="text-neutral-600">
+            No projects found{selectedTag ? ` for tag "${selectedTag}"` : ''}.
+          </p>
+          {query.trim() && <p className="mt-2 text-neutral-500">Search: "{query.trim()}"</p>}
           <button
             onClick={() => setSearchParams({})}
             className="mt-4 font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
