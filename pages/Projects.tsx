@@ -16,48 +16,32 @@ const Projects: React.FC = () => {
 
       </header>
 
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_260px] gap-10 xl:gap-12">
-        <div className="space-y-8">
-          {filteredProjects.map((project) => (
-            <article
-              key={project.id}
-              className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8"
-            >
-              <div className="space-y-3 pt-1">
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">Project</p>
-              </div>
+      <div className="space-y-8">
+        {filteredProjects.map((project) => (
+          <article
+            key={project.id}
+            className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8"
+          >
+            <div className="space-y-3 pt-1">
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">Project</p>
+            </div>
 
-              <div className="space-y-4 flex flex-col items-start">
-                <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                  <Link to={`/projects/${project.id}`} className="hover:opacity-70 transition-opacity">
-                    {project.title}
-                  </Link>
-                </h2>
-                <p className="text-neutral-600 leading-relaxed max-w-2xl">{project.description}</p>
-                <Link
-                  to={`/projects/${project.id}`}
-                  className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
-                >
-                  View Case Study
+            <div className="space-y-4 flex flex-col items-start">
+              <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
+                <Link to={`/projects/${project.id}`} className="hover:opacity-70 transition-opacity">
+                  {project.title}
                 </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <aside className="hidden xl:block">
-          <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
-            <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Project Headings</p>
-            <ol className="mt-4 space-y-3">
-              {filteredProjects.map((project, index) => (
-                <li key={project.id} className="flex gap-3 leading-snug">
-                  <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="text-sm text-neutral-800">{project.title}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </aside>
+              </h2>
+              <p className="text-neutral-600 leading-relaxed max-w-2xl">{project.description}</p>
+              <Link
+                to={`/projects/${project.id}`}
+                className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
+              >
+                View Case Study
+              </Link>
+            </div>
+          </article>
+        ))}
       </div>
 
       {filteredProjects.length === 0 && (

@@ -1,68 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Calendar } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 
 const Blog: React.FC = () => {
-  const filteredPosts = BLOG_POSTS;
-
   return (
-    <div className="space-y-10 pb-16">
-      <header className="border-b border-[#ddd8cf] pb-7 pt-2 md:pt-4">
-        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Blog</p>
-        <h1 className="mt-3 text-4xl md:text-6xl tracking-tight">Writing</h1>
-        <p className="mt-4 text-neutral-600 max-w-2xl leading-relaxed">
-          Notes on AI systems, evaluation strategies, and engineering tradeoffs from production work.
-        </p>
-
+    <div className="pb-16">
+      <header className="border-b border-[#ddd8cf] pb-8 pt-2 md:pt-4">
+        <h1 className="text-4xl md:text-6xl tracking-tight">Blog Posts</h1>
       </header>
 
-      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_260px] gap-10 xl:gap-12">
-        <div className="space-y-8">
-          {filteredPosts.map((post) => (
-            <article key={post.id} className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-5 md:gap-10 border-b border-[#e5e1d9] pb-8">
-              <div className="space-y-3 pt-1">
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-500">Post</p>
-                <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">{post.date}</p>
-              </div>
+      <div className="mt-10 space-y-10">
+        {BLOG_POSTS.map((post) => {
+          const year = new Date(post.date).getFullYear();
+          const metaLine = [...post.tags, String(year)].join(', ');
 
-              <div className="space-y-4 flex flex-col items-start">
-                <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                  <Link to={`/blog/${post.id}`} className="hover:opacity-70 transition-opacity">
-                    {post.title}
-                  </Link>
-                </h2>
-                <p className="text-neutral-600 leading-relaxed max-w-2xl">{post.excerpt}</p>
-                <Link
-                  to={`/blog/${post.id}`}
-                  className="font-mono text-xs uppercase tracking-wide underline underline-offset-4 hover:opacity-70 transition-opacity"
-                >
-                  Read Post
+          return (
+            <article key={post.id} className="border-b border-[#e5e1d9] pb-9">
+              <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
+                <Link to={`/blog/${post.id}`} className="hover:opacity-70 transition-opacity">
+                  {post.title}
                 </Link>
-              </div>
+              </h2>
+
+              <p className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
+                <Calendar size={13} />
+                {post.date}
+              </p>
+
+              <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
+
+              <p className="mt-4 text-neutral-700 leading-relaxed max-w-4xl">{post.excerpt}</p>
             </article>
-          ))}
-        </div>
-
-        <aside className="hidden xl:block">
-          <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
-            <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Blog Headings</p>
-            <ol className="mt-4 space-y-3">
-              {filteredPosts.map((post, index) => (
-                <li key={post.id} className="flex gap-3 leading-snug">
-                  <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="text-sm text-neutral-800">{post.title}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </aside>
+          );
+        })}
       </div>
-
-      {filteredPosts.length === 0 && (
-        <div className="border border-dashed border-[#d4cfc6] p-10 text-center">
-          <p className="text-neutral-600">No posts found.</p>
-        </div>
-      )}
     </div>
   );
 };
