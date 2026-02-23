@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
-import avatarImage from '../src/assets/avatar.jpg';
+import abstractAiImage from '../src/assets/ai-abstract.svg';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -19,9 +19,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <aside className="md:sticky md:top-10 md:self-start border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
           <div className="mb-5 overflow-hidden border border-[#d7d2c9] bg-[#efebe3]">
             <img
-              src={avatarImage}
-              alt="Abstract profile"
-              className="w-full h-28 object-cover grayscale contrast-125 saturate-75 opacity-90"
+              src={abstractAiImage}
+              alt="Abstract AI visual"
+              className="w-full h-28 object-cover opacity-95"
             />
           </div>
 
