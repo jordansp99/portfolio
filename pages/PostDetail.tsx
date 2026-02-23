@@ -78,9 +78,14 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
   const allHeadings = React.useMemo(() => extractHeadings(data.markdown), [data.markdown]);
   const headings = React.useMemo(() => allHeadings.filter((h) => h.level >= 2), [allHeadings]);
-  const headingSlugger = React.useMemo(() => createSlugger(), [data.markdown]);
+  const headingSlugger = createSlugger();
 
   const blogYear = type === 'blog' && 'date' in data ? new Date(data.date).getFullYear() : null;
+  const scrollToHeading = (slug: string) => {
+    const el = document.getElementById(slug);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <article className="max-w-6xl mx-auto pb-20">
@@ -201,14 +206,15 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                 {headings.map((heading, index) => (
                   <li key={heading.slug} className="flex gap-3 leading-snug">
                     <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
-                    <a
-                      href={`#${heading.slug}`}
+                    <button
+                      type="button"
+                      onClick={() => scrollToHeading(heading.slug)}
                       className={`text-sm hover:text-neutral-900 transition-colors ${
                         heading.level === 3 ? 'text-neutral-500' : 'text-neutral-800'
-                      }`}
+                      } text-left`}
                     >
                       {heading.text}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ol>
