@@ -11,7 +11,7 @@ const Home: React.FC = () => {
           I build practical AI systems that ship and hold up in production.
         </h1>
         <p className="mt-5 text-lg text-neutral-600 max-w-2xl leading-relaxed">
-          I focus on NLP, model evaluation, and building resilient pipelines for high-stakes language tasks.
+          I focus on NLP, model evaluation, and reliable ML systems built for real-world use.
         </p>
       </section>
 
