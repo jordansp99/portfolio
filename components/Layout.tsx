@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
-import abstractAiImage from '../src/assets/ai-abstract.svg';
+import abstractAiImage from '../src/assets/ai-reference.jpg';
 import { BLOG_POSTS, PROJECTS } from '../constants';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -46,8 +46,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-[#f6f5f2] text-neutral-900 selection:bg-neutral-900 selection:text-[#f6f5f2]">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12 grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] gap-10 md:gap-12">
-        <aside className="md:sticky md:top-10 md:self-start md:-ml-10 lg:-ml-16 xl:-ml-20 border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
+      <div className="w-full max-w-[1500px] ml-0 mr-auto px-4 md:px-8 py-8 md:py-12 grid grid-cols-1 md:grid-cols-[190px_minmax(0,1fr)] gap-8 md:gap-10">
+        <aside className="md:sticky md:top-10 md:self-start md:-ml-16 lg:-ml-24 xl:-ml-32 border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
           <div className="mb-5 overflow-hidden border border-[#d7d2c9] bg-[#efebe3]">
             <img
               src={abstractAiImage}
@@ -140,7 +140,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
         </aside>
 
-        <main className="min-w-0 border-l border-[#ddd8cf] pl-0 md:pl-10">{children}</main>
+        <main className="min-w-0 border-l border-[#ddd8cf] pl-0 md:pl-8">{children}</main>
       </div>
 
       <footer className="border-t border-[#ddd8cf] text-neutral-500">
