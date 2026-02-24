@@ -16,19 +16,6 @@ const Home: React.FC = () => {
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
-        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Experience</p>
-        <div className="space-y-6">
-          {EXPERIENCES.map((exp, idx) => (
-            <article key={idx} className="border-b border-[#e5e1d9] pb-5">
-              <h2 className="text-2xl tracking-tight">{exp.role}</h2>
-              <p className="mt-1 text-neutral-600">{exp.company}</p>
-              <p className="mt-1 font-mono text-xs uppercase tracking-wide text-neutral-500">{exp.period}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Education</p>
         <div className="space-y-5">
           <article className="border-b border-[#e5e1d9] pb-5">
@@ -41,6 +28,19 @@ const Home: React.FC = () => {
             <p className="mt-1 text-neutral-600">University of Birmingham</p>
             <p className="mt-1 font-mono text-xs uppercase tracking-wide text-neutral-500">Sept 2016 to Sept 2020</p>
           </article>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
+        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Experience</p>
+        <div className="space-y-6">
+          {EXPERIENCES.map((exp, idx) => (
+            <article key={idx} className="border-b border-[#e5e1d9] pb-5">
+              <h2 className="text-2xl tracking-tight">{exp.role}</h2>
+              <p className="mt-1 text-neutral-600">{exp.company}</p>
+              <p className="mt-1 font-mono text-xs uppercase tracking-wide text-neutral-500">{exp.period}</p>
+            </article>
+          ))}
         </div>
       </section>
 
