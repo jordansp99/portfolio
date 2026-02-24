@@ -97,7 +97,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
         Back to {listLabel}
       </Link>
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_250px] gap-10 lg:gap-12">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-10 lg:gap-12">
         <div className="min-w-0">
           <header className="border-b border-[#ddd8cf] pb-8">
             <h1 className="text-4xl md:text-5xl tracking-tight leading-tight text-neutral-900 max-w-4xl">{data.title}</h1>
@@ -123,7 +123,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             </div>
           )}
 
-          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900 prose-code:text-neutral-800 prose-code:bg-neutral-100 prose-code:px-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
+          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900 prose-code:text-neutral-800 prose-code:px-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
             <ReactMarkdown
               components={{
                 h1: ({ node, children, ...props }) => {
@@ -159,7 +159,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
                   if (isInline) {
                     return (
-                      <code className="bg-neutral-100 text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" {...props}>
+                      <code className="bg-transparent border border-[#d8d3cb] text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" {...props}>
                         {children}
                       </code>
                     );
