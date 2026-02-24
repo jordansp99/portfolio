@@ -49,7 +49,20 @@ const Home: React.FC = () => {
         <div className="space-y-5">
           {PUBLICATIONS.map((pub, idx) => (
             <article key={idx} className="border-b border-[#e5e1d9] pb-4">
-              <h3 className="text-xl tracking-tight leading-snug">{pub.title}</h3>
+              {pub.link ? (
+                <h3 className="text-xl tracking-tight leading-snug">
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
+                  >
+                    {pub.title}
+                  </a>
+                </h3>
+              ) : (
+                <h3 className="text-xl tracking-tight leading-snug">{pub.title}</h3>
+              )}
               <p className="mt-2 text-sm text-neutral-600">{pub.authors}</p>
               <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
                 {pub.venue} {pub.year}
