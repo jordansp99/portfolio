@@ -123,7 +123,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             </div>
           )}
 
-          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900 prose-code:text-neutral-800 prose-code:px-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none">
+          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900">
             <ReactMarkdown
               components={{
                 h1: ({ node, children, ...props }) => {
