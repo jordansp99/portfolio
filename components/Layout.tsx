@@ -128,10 +128,22 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
 
           <div className="mt-6 flex gap-4 text-neutral-500">
-            <a href="#" className="hover:text-neutral-900 transition-colors" aria-label="GitHub">
+            <a
+              href="https://github.com/jordansp99"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-neutral-900 transition-colors"
+              aria-label="GitHub"
+            >
               <Github size={18} />
             </a>
-            <a href="#" className="hover:text-neutral-900 transition-colors" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/jordan-speight/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-neutral-900 transition-colors"
+              aria-label="LinkedIn"
+            >
               <Linkedin size={18} />
             </a>
             <a href="mailto:jordanspeight@hotmail.com" className="hover:text-neutral-900 transition-colors" aria-label="Email">
