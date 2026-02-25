@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         </h1>
         <p className="mt-5 text-lg text-neutral-600 max-w-2xl leading-relaxed">
           I am Jordan Speight, a data scientist focused on machine learning and AI systems.
-          I enjoy working on hard problems with great people, and I occasionally write about ideas that interest me.
+          My work focuses on speech and language AI, including ASR, NLP, model evaluation, and practical ML systems for real-world use.
         </p>
       </section>
 
