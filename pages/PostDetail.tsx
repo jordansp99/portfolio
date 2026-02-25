@@ -97,7 +97,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
         Back to {listLabel}
       </Link>
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-10 lg:gap-12">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_240px] gap-10 lg:gap-12">
         <div className="min-w-0">
           <header className="border-b border-[#ddd8cf] pb-8">
             <h1 className="text-4xl md:text-5xl tracking-tight leading-tight text-neutral-900 max-w-4xl">{data.title}</h1>
@@ -209,8 +209,10 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                     <button
                       type="button"
                       onClick={() => scrollToHeading(heading.slug)}
-                      className={`text-sm hover:text-neutral-900 transition-colors ${
-                        heading.level === 3 ? 'text-neutral-500' : 'text-neutral-800'
+                      className={`text-sm underline underline-offset-4 transition-colors ${
+                        heading.level === 3
+                          ? 'text-blue-600 hover:text-blue-700'
+                          : 'text-blue-700 hover:text-blue-800'
                       } text-left`}
                     >
                       {heading.text}

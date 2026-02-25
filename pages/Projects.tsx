@@ -21,12 +21,6 @@ const Projects: React.FC = () => {
                 </Link>
               </h2>
               <p className="text-neutral-600 leading-relaxed max-w-2xl">{project.description}</p>
-              <Link
-                to={`/projects/${project.id}`}
-                className="font-mono text-xs uppercase tracking-wide text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
-              >
-                View Case Study
-              </Link>
             </div>
           </article>
         ))}
