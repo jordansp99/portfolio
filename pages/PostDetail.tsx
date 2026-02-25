@@ -57,6 +57,21 @@ const nodeToText = (node: React.ReactNode): string => {
   return '';
 };
 
+const resolveAssetUrl = (src?: string): string | undefined => {
+  if (!src) return src;
+  if (/^(https?:)?\/\//.test(src) || src.startsWith('data:') || src.startsWith('blob:')) return src;
+
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base.slice(0, -1) : base;
+
+  if (src.startsWith('/')) {
+    if (normalizedBase && src.startsWith(`${normalizedBase}/`)) return src;
+    return `${normalizedBase}${src}`;
+  }
+
+  return src;
+};
+
 const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const { id } = useParams();
   const data = type === 'blog' ? BLOG_POSTS.find((p) => p.id === id) : PROJECTS.find((p) => p.id === id);
@@ -119,7 +134,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
           {type === 'project' && 'imageUrl' in data && (
             <div className="mt-8 overflow-hidden border border-[#ddd8cf]">
-              <img src={data.imageUrl} className="w-full h-auto object-cover" alt={data.title} />
+              <img src={resolveAssetUrl(data.imageUrl)} className="w-full h-auto object-cover" alt={data.title} />
             </div>
           )}
 
@@ -183,7 +198,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                 },
                 img: ({ node, ...props }) => (
                   <figure className="my-8">
-                    <img className="w-full border border-[#ddd8cf]" {...props} />
+                    <img className="w-full border border-[#ddd8cf]" {...props} src={resolveAssetUrl(props.src)} />
                     {props.alt && (
                       <figcaption className="text-center text-xs font-mono text-neutral-500 mt-2 uppercase tracking-wide">
                         {props.alt}
