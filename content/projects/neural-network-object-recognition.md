@@ -15,6 +15,8 @@ imageUrl: /projects/neural-network-object-recognition/cifar10-examples-by-class.
 
 This project presents a comparative study of two computer vision approaches for object recognition on CIFAR-10: a custom convolutional neural network (CNN) optimized through Neural Architecture Search (NAS), and a transfer-learning pipeline based on a pre-trained Vision Transformer (ViT). The objective was to build a robust image classifier that generalizes well to unseen data, while evaluating the practical trade-offs between training from scratch and adapting a large pre-trained model. The resulting workflow is applicable to real-world scenarios such as vehicle recognition in traffic footage, product sorting in warehouses, and assistive object detection for visually impaired users.
 
+*Tip: Click any image to zoom in.*
+
 ## Dataset and Data Preparation
 
 I used the CIFAR-10 dataset, which contains 60,000 color images of size 32x32 across 10 classes. To stabilize optimization and ensure features were on a comparable scale, pixel values were normalized from the original `[0, 255]` range to `[0, 1]`. The data was split into 40,000 training images, 10,000 validation images, and 10,000 test images. This separation made it possible to tune architecture and training decisions on validation data while preserving an untouched test set for final generalization assessment.
@@ -29,7 +31,7 @@ For the first model, I built a custom CNN and optimized its design using Keras T
 
 The hyperparameter space covered activation functions (ReLU and ELU), convolutional depth and filter widths, dense layer depth and width, dropout strength, data augmentation ranges, and learning rate. This broad search space allowed the tuner to discover non-obvious but high-performing combinations.
 
-### Hyperparameter Search Space (Extracted Table)
+### Hyperparameter Search Space
 
 | Hyperparameter | Search Range | Step/Sampling |
 | --- | --- | --- |

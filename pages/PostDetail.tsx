@@ -250,9 +250,12 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
           <button
             type="button"
             onClick={() => resolvedSrc && setLightboxImage({ src: resolvedSrc, alt: props.alt || 'Image preview' })}
-            className="block w-full text-left cursor-zoom-in"
+            className="group relative block w-full text-left cursor-zoom-in"
           >
             <img className="w-full border border-[#ddd8cf]" {...props} src={resolvedSrc} />
+            <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] font-mono uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
+              Click to zoom
+            </span>
           </button>
           {props.alt && (
             <figcaption className="text-center text-xs font-mono text-neutral-500 mt-2 uppercase tracking-wide">
@@ -302,9 +305,12 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                   const src = resolveAssetUrl(data.imageUrl);
                   if (src) setLightboxImage({ src, alt: data.title });
                 }}
-                className="block w-full text-left cursor-zoom-in"
+                className="group relative block w-full text-left cursor-zoom-in"
               >
                 <img src={resolveAssetUrl(data.imageUrl)} className="w-full h-auto object-cover" alt={data.title} />
+                <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] font-mono uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
+                  Click to zoom
+                </span>
               </button>
             </div>
           )}
@@ -329,7 +335,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                           <tr key={rowIndex}>
                             {row.map((cell, cellIndex) => (
                               <td key={cellIndex} className="border border-[#ddd8cf] px-3 py-2 text-neutral-700 align-top">
-                                {cell}
+                                <ReactMarkdown
+                                  components={{
+                                    p: ({ children }) => <span>{children}</span>,
+                                  }}
+                                >
+                                  {cell}
+                                </ReactMarkdown>
                               </td>
                             ))}
                           </tr>
