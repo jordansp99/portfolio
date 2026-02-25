@@ -17,6 +17,19 @@ type TocHeading = {
   slug: string;
 };
 
+type TableBlock = {
+  type: 'table';
+  headers: string[];
+  rows: string[][];
+};
+
+type MarkdownBlock = {
+  type: 'markdown';
+  content: string;
+};
+
+type ContentBlock = TableBlock | MarkdownBlock;
+
 const slugify = (text: string): string =>
   text
     .toLowerCase()
@@ -72,6 +85,66 @@ const resolveAssetUrl = (src?: string): string | undefined => {
   return src;
 };
 
+const isTableSeparatorLine = (line: string): boolean => {
+  const cells = line
+    .trim()
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
+  return cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+};
+
+const parseTableRow = (line: string): string[] =>
+  line
+    .trim()
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
+
+const splitMarkdownTables = (markdown: string): ContentBlock[] => {
+  const lines = markdown.split('\n');
+  const blocks: ContentBlock[] = [];
+  let mdBuffer: string[] = [];
+  let i = 0;
+
+  const flushMarkdown = () => {
+    if (mdBuffer.length === 0) return;
+    const content = mdBuffer.join('\n').trim();
+    if (content) blocks.push({ type: 'markdown', content });
+    mdBuffer = [];
+  };
+
+  while (i < lines.length) {
+    const current = lines[i];
+    const next = lines[i + 1];
+    const looksLikeHeader = current?.includes('|') && !/^\s*```/.test(current);
+    const looksLikeSeparator = typeof next === 'string' && next.includes('|') && isTableSeparatorLine(next);
+
+    if (looksLikeHeader && looksLikeSeparator) {
+      flushMarkdown();
+      const headers = parseTableRow(current);
+      i += 2;
+
+      const rows: string[][] = [];
+      while (i < lines.length && lines[i].includes('|') && !/^\s*$/.test(lines[i])) {
+        rows.push(parseTableRow(lines[i]));
+        i += 1;
+      }
+
+      blocks.push({ type: 'table', headers, rows });
+      continue;
+    }
+
+    mdBuffer.push(current);
+    i += 1;
+  }
+
+  flushMarkdown();
+  return blocks;
+};
+
 const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const { id } = useParams();
   const data = type === 'blog' ? BLOG_POSTS.find((p) => p.id === id) : PROJECTS.find((p) => p.id === id);
@@ -94,12 +167,101 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const allHeadings = React.useMemo(() => extractHeadings(data.markdown), [data.markdown]);
   const headings = React.useMemo(() => allHeadings.filter((h) => h.level >= 2), [allHeadings]);
   const headingSlugger = createSlugger();
+  const contentBlocks = React.useMemo(() => splitMarkdownTables(data.markdown), [data.markdown]);
+  const [lightboxImage, setLightboxImage] = React.useState<{ src: string; alt: string } | null>(null);
 
   const blogYear = type === 'blog' && 'date' in data ? new Date(data.date).getFullYear() : null;
   const scrollToHeading = (slug: string) => {
     const el = document.getElementById(slug);
     if (!el) return;
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const closeLightbox = () => setLightboxImage(null);
+
+  React.useEffect(() => {
+    if (!lightboxImage) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeLightbox();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [lightboxImage]);
+
+  const markdownComponents = {
+    h1: ({ node, children, ...props }: any) => {
+      const id = headingSlugger(nodeToText(children));
+      return (
+        <h1 id={id} className="text-3xl mt-10 mb-5 scroll-mt-24" {...props}>
+          {children}
+        </h1>
+      );
+    },
+    h2: ({ node, children, ...props }: any) => {
+      const id = headingSlugger(nodeToText(children));
+      return (
+        <h2 id={id} className="text-2xl mt-10 mb-4 scroll-mt-24" {...props}>
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ node, children, ...props }: any) => {
+      const id = headingSlugger(nodeToText(children));
+      return (
+        <h3 id={id} className="text-xl mt-8 mb-3 scroll-mt-24" {...props}>
+          {children}
+        </h3>
+      );
+    },
+    blockquote: ({ node, ...props }: any) => (
+      <blockquote className="border-l-2 border-[#cfc8bd] pl-4 italic text-neutral-600" {...props} />
+    ),
+    code: ({ node, className, children, ...props }: any) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const isInline = !match && !String(children).includes('\n');
+
+      if (isInline) {
+        return (
+          <code className="bg-transparent border border-[#d8d3cb] text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" {...props}>
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <div className="my-8 border border-[#ddd8cf] overflow-hidden">
+          <SyntaxHighlighter
+            style={oneDark}
+            language={match ? match[1] : 'text'}
+            PreTag="div"
+            customStyle={{ margin: 0, padding: '1rem', background: '#111827', fontSize: '0.84rem' }}
+            showLineNumbers={true}
+            lineNumberStyle={{ minWidth: '2.2em', paddingRight: '1em', color: '#6b7280', textAlign: 'right' }}
+            {...props}
+          >
+            {String(children).replace(/\n$/, '')}
+          </SyntaxHighlighter>
+        </div>
+      );
+    },
+    img: ({ node, ...props }: any) => {
+      const resolvedSrc = resolveAssetUrl(props.src);
+      return (
+        <figure className="my-8">
+          <button
+            type="button"
+            onClick={() => resolvedSrc && setLightboxImage({ src: resolvedSrc, alt: props.alt || 'Image preview' })}
+            className="block w-full text-left cursor-zoom-in"
+          >
+            <img className="w-full border border-[#ddd8cf]" {...props} src={resolvedSrc} />
+          </button>
+          {props.alt && (
+            <figcaption className="text-center text-xs font-mono text-neutral-500 mt-2 uppercase tracking-wide">
+              {props.alt}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
   };
 
   return (
@@ -134,82 +296,56 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
           {type === 'project' && 'imageUrl' in data && (
             <div className="mt-8 overflow-hidden border border-[#ddd8cf]">
-              <img src={resolveAssetUrl(data.imageUrl)} className="w-full h-auto object-cover" alt={data.title} />
+              <button
+                type="button"
+                onClick={() => {
+                  const src = resolveAssetUrl(data.imageUrl);
+                  if (src) setLightboxImage({ src, alt: data.title });
+                }}
+                className="block w-full text-left cursor-zoom-in"
+              >
+                <img src={resolveAssetUrl(data.imageUrl)} className="w-full h-auto object-cover" alt={data.title} />
+              </button>
             </div>
           )}
 
           <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900">
-            <ReactMarkdown
-              components={{
-                h1: ({ node, children, ...props }) => {
-                  const id = headingSlugger(nodeToText(children));
-                  return (
-                    <h1 id={id} className="text-3xl mt-10 mb-5 scroll-mt-24" {...props}>
-                      {children}
-                    </h1>
-                  );
-                },
-                h2: ({ node, children, ...props }) => {
-                  const id = headingSlugger(nodeToText(children));
-                  return (
-                    <h2 id={id} className="text-2xl mt-10 mb-4 scroll-mt-24" {...props}>
-                      {children}
-                    </h2>
-                  );
-                },
-                h3: ({ node, children, ...props }) => {
-                  const id = headingSlugger(nodeToText(children));
-                  return (
-                    <h3 id={id} className="text-xl mt-8 mb-3 scroll-mt-24" {...props}>
-                      {children}
-                    </h3>
-                  );
-                },
-                blockquote: ({ node, ...props }) => (
-                  <blockquote className="border-l-2 border-[#cfc8bd] pl-4 italic text-neutral-600" {...props} />
-                ),
-                code: ({ node, className, children, ...props }: any) => {
-                  const match = /language-(\w+)/.exec(className || '');
-                  const isInline = !match && !String(children).includes('\n');
+            {contentBlocks.map((block, index) => {
+              if (block.type === 'table') {
+                return (
+                  <div key={`table-${index}`} className="my-8 overflow-x-auto border border-[#ddd8cf]">
+                    <table className="w-full border-collapse text-sm">
+                      <thead className="bg-[#f1ede6]">
+                        <tr>
+                          {block.headers.map((header, headerIndex) => (
+                            <th key={headerIndex} className="border border-[#ddd8cf] px-3 py-2 text-left font-medium text-neutral-900">
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {block.rows.map((row, rowIndex) => (
+                          <tr key={rowIndex}>
+                            {row.map((cell, cellIndex) => (
+                              <td key={cellIndex} className="border border-[#ddd8cf] px-3 py-2 text-neutral-700 align-top">
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              }
 
-                  if (isInline) {
-                    return (
-                      <code className="bg-transparent border border-[#d8d3cb] text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" {...props}>
-                        {children}
-                      </code>
-                    );
-                  }
-
-                  return (
-                    <div className="my-8 border border-[#ddd8cf] overflow-hidden">
-                      <SyntaxHighlighter
-                        style={oneDark}
-                        language={match ? match[1] : 'text'}
-                        PreTag="div"
-                        customStyle={{ margin: 0, padding: '1rem', background: '#111827', fontSize: '0.84rem' }}
-                        showLineNumbers={true}
-                        lineNumberStyle={{ minWidth: '2.2em', paddingRight: '1em', color: '#6b7280', textAlign: 'right' }}
-                        {...props}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    </div>
-                  );
-                },
-                img: ({ node, ...props }) => (
-                  <figure className="my-8">
-                    <img className="w-full border border-[#ddd8cf]" {...props} src={resolveAssetUrl(props.src)} />
-                    {props.alt && (
-                      <figcaption className="text-center text-xs font-mono text-neutral-500 mt-2 uppercase tracking-wide">
-                        {props.alt}
-                      </figcaption>
-                    )}
-                  </figure>
-                ),
-              }}
-            >
-              {data.markdown}
-            </ReactMarkdown>
+              return (
+                <ReactMarkdown key={`md-${index}`} components={markdownComponents}>
+                  {block.content}
+                </ReactMarkdown>
+              );
+            })}
           </div>
         </div>
 
@@ -239,6 +375,26 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
           </aside>
         )}
       </div>
+      {lightboxImage && (
+        <div className="fixed inset-0 z-50 bg-black/85 p-4 md:p-8" onClick={closeLightbox}>
+          <button
+            type="button"
+            onClick={closeLightbox}
+            className="absolute right-4 top-4 md:right-8 md:top-8 text-white text-3xl leading-none"
+            aria-label="Close image preview"
+          >
+            x
+          </button>
+          <div className="h-full w-full flex items-center justify-center">
+            <img
+              src={lightboxImage.src}
+              alt={lightboxImage.alt}
+              className="max-h-[92vh] max-w-[92vw] object-contain"
+              onClick={(event) => event.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </article>
   );
 };
