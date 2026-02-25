@@ -11,7 +11,7 @@ const Home: React.FC = () => {
           Welcome to my corner of the internet.
         </h1>
         <p className="mt-5 text-lg text-neutral-600 max-w-2xl leading-relaxed">
-          Hello, fellow traveler. I am Jordan Speight, a data scientist focused on machine learning and AI systems.
+          I am Jordan Speight, a data scientist focused on machine learning and AI systems.
           I enjoy working on hard problems with great people, and I occasionally write about ideas that interest me.
         </p>
       </section>
