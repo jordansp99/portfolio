@@ -1,7 +1,7 @@
 ---
 title: Neural Network Models for Object Recognition
 order: 2
-description: Built and compared a NAS-optimized CNN and a transfer-learned Vision Transformer on CIFAR-10, improving test accuracy from 81.38% to 96.12%.
+description: Built and compared a NAS-optimised CNN and a transfer-learned Vision Transformer on CIFAR-10, improving test accuracy from 81.38% to 96.12%.
 tags:
   - Computer Vision
   - CNN
@@ -13,19 +13,19 @@ imageUrl: /projects/neural-network-object-recognition/cifar10-examples-by-class.
 
 # Neural Network Models for Object Recognition
 
-This project presents a comparative study of two computer vision approaches for object recognition on CIFAR-10: a custom convolutional neural network (CNN) optimized through Neural Architecture Search (NAS), and a transfer-learning pipeline based on a pre-trained Vision Transformer (ViT). The objective was to build a robust image classifier that generalizes well to unseen data, while evaluating the practical trade-offs between training from scratch and adapting a large pre-trained model. The resulting workflow is applicable to real-world scenarios such as vehicle recognition in traffic footage, product sorting in warehouses, and assistive object detection for visually impaired users.
+This project presents a comparative study of two computer vision approaches for object recognition on CIFAR-10: a custom convolutional neural network (CNN) optimised through Neural Architecture Search (NAS), and a transfer-learning pipeline based on a pre-trained Vision Transformer (ViT). The objective was to build a robust image classifier that generalises well to unseen data, while evaluating the practical trade-offs between training from scratch and adapting a large pre-trained model. The resulting workflow is applicable to real-world scenarios such as vehicle recognition in traffic footage, product sorting in warehouses, and assistive object detection for visually impaired users.
 
 *Tip: Click any image to zoom in.*
 
 ## Dataset and Data Preparation
 
-I used the CIFAR-10 dataset, which contains 60,000 color images of size 32x32 across 10 classes. To stabilize optimization and ensure features were on a comparable scale, pixel values were normalized from the original `[0, 255]` range to `[0, 1]`. The data was split into 40,000 training images, 10,000 validation images, and 10,000 test images. This separation made it possible to tune architecture and training decisions on validation data while preserving an untouched test set for final generalization assessment.
+I used the CIFAR-10 dataset, which contains 60,000 colour images of size 32x32 across 10 classes. To stabilise optimisation and ensure features were on a comparable scale, pixel values were normalised from the original `[0, 255]` range to `[0, 1]`. The data was split into 40,000 training images, 10,000 validation images, and 10,000 test images. This separation made it possible to tune architecture and training decisions on validation data while preserving an untouched test set for final generalisation assessment.
 
 ![CIFAR-10 examples by class](/projects/neural-network-object-recognition/cifar10-examples-by-class.png)
 
 ## Model 1: Custom CNN with Neural Architecture Search
 
-For the first model, I built a custom CNN and optimized its design using Keras Tuner with the Hyperband algorithm. Rather than training every candidate architecture for the full schedule, Hyperband allocated resources progressively by training many candidates for short runs, eliminating weak performers, and extending training only for stronger models. This strategy significantly reduced computational waste and replaced manual trial-and-error with a structured search process.
+For the first model, I built a custom CNN and optimised its design using Keras Tuner with the Hyperband algorithm. Rather than training every candidate architecture for the full schedule, Hyperband allocated resources progressively by training many candidates for short runs, eliminating weak performers, and extending training only for stronger models. This strategy significantly reduced computational waste and replaced manual trial-and-error with a structured search process.
 
 ### Search Space Highlights
 
@@ -65,9 +65,9 @@ The tuner evaluated dozens of candidate configurations. Most trials either plate
 
 ![Selected CNN architecture](/projects/neural-network-object-recognition/cnn-architecture.png)
 
-## Final CNN Training Behavior
+## Final CNN Training Behaviour
 
-During full training, the training and validation curves tracked closely, indicating that the model was learning transferable patterns rather than memorizing the training set. Early stopping with a patience of 10 (monitoring validation loss) was enabled for regularization and model safety, but the stopping condition was not triggered because validation loss continued to improve through the full training horizon.
+During full training, the training and validation curves tracked closely, indicating that the model was learning transferable patterns rather than memorising the training set. Early stopping with a patience of 10 (monitoring validation loss) was enabled for regularisation and model safety, but the stopping condition was not triggered because validation loss continued to improve through the full training horizon.
 
 ![CNN training and validation curves](/projects/neural-network-object-recognition/cnn-train-val-curves.png)
 
@@ -87,9 +87,9 @@ For the second model, I shifted from training-from-scratch to transfer learning 
 
 ### Transfer Learning Setup
 
-I implemented a feature-extraction transfer-learning setup in two stages: first, the ViT backbone was frozen to preserve pre-trained representations; second, the original classification layer was replaced and only the new head was trained on CIFAR-10. The data pipeline included stronger augmentation (notably random crops and flips), and CIFAR-10 images were upscaled from 32x32 to 224x224 to match ViT input requirements. A conservative learning rate of `2e-5` was used for stable optimization of the new classifier head.
+I implemented a feature-extraction transfer-learning setup in two stages: first, the ViT backbone was frozen to preserve pre-trained representations; second, the original classification layer was replaced and only the new head was trained on CIFAR-10. The data pipeline included stronger augmentation (notably random crops and flips), and CIFAR-10 images were upscaled from 32x32 to 224x224 to match ViT input requirements. A conservative learning rate of `2e-5` was used for stable optimisation of the new classifier head.
 
-## ViT Training Behavior and Results
+## ViT Training Behaviour and Results
 
 Transfer learning delivered an immediate and significant performance gain. Validation accuracy exceeded 90% after the first epoch and surpassed 95% at peak. Validation performance remained higher than training performance throughout most of the run, which is consistent with aggressive augmentation being applied during training but not during validation.
 
