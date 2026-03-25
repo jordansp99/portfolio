@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordan Speight | Data Scientist</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/plugins/tailwindcss-typography.js"></script>
+    <script>
+      tailwind.config = {
+        plugins: [require('@tailwindcss/typography')],
+      }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,6 +31,28 @@
         }
         .font-mono {
             font-family: 'IBM Plex Mono', monospace;
+        }
+        article ul {
+            list-style-type: disc !important;
+            margin-left: 1.5rem !important;
+        }
+        article ul li {
+            display: list-item !important;
+        }
+        article ol {
+            list-style-type: decimal !important;
+            margin-left: 1.5rem !important;
+        }
+        article ol li {
+            display: list-item !important;
+        }
+        aside ul {
+            list-style-type: none !important;
+            padding-left: 0 !important;
+            margin: 0 !important;
+        }
+        aside ul li {
+            list-style: none !important;
         }
     </style>
 <script type="importmap">

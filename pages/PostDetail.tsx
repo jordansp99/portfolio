@@ -49,8 +49,22 @@ const createSlugger = () => {
   };
 };
 
-const extractHeadings = (markdown: string): TocHeading[] => {
-  const slugger = createSlugger();
+const makeSlug = (text: string, seen: Map<string, number>): string => {
+  const base = slugify(text) || 'section';
+  const count = seen.get(base) ?? 0;
+  seen.set(base, count + 1);
+  return count === 0 ? base : `${base}-${count}`;
+};
+
+const formatDateBritish = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = date.toLocaleDateString('en-GB', { month: 'short' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
+const extractHeadings = (markdown: string, seen: Map<string, number>): TocHeading[] => {
   return markdown
     .split('\n')
     .map((line) => line.match(/^(#{1,6})\s+(.+)$/))
@@ -58,7 +72,7 @@ const extractHeadings = (markdown: string): TocHeading[] => {
     .map((match) => {
       const level = match[1].length;
       const text = match[2].trim();
-      return { level, text, slug: slugger(text) };
+      return { level, text, slug: makeSlug(text, seen) };
     })
     .filter((heading) => heading.level >= 1 && heading.level <= 3);
 };
@@ -164,17 +178,29 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const listPath = type === 'blog' ? '/blog' : '/projects';
   const listLabel = type === 'blog' ? 'Blog' : 'Projects';
 
-  const allHeadings = React.useMemo(() => extractHeadings(data.markdown), [data.markdown]);
+  const headingSeenRef = React.useRef(new Map<string, number>());
+  const allHeadings = React.useMemo(() => {
+    headingSeenRef.current = new Map<string, number>();
+    return extractHeadings(data.markdown, headingSeenRef.current);
+  }, [data.markdown]);
   const headings = React.useMemo(() => allHeadings.filter((h) => h.level >= 2), [allHeadings]);
-  const headingSlugger = createSlugger();
   const contentBlocks = React.useMemo(() => splitMarkdownTables(data.markdown), [data.markdown]);
   const [lightboxImage, setLightboxImage] = React.useState<{ src: string; alt: string } | null>(null);
 
   const blogYear = type === 'blog' && 'date' in data ? new Date(data.date).getFullYear() : null;
   const scrollToHeading = (slug: string) => {
     const el = document.getElementById(slug);
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    const headings = document.querySelectorAll('article h1, article h2, article h3');
+    for (const h of headings) {
+      if (h.id === slug) {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
   };
   const closeLightbox = () => setLightboxImage(null);
 
@@ -189,7 +215,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
   const markdownComponents = {
     h1: ({ node, children, ...props }: any) => {
-      const id = headingSlugger(nodeToText(children));
+      const id = makeSlug(nodeToText(children), headingSeenRef.current);
       return (
         <h1 id={id} className="text-3xl mt-10 mb-5 scroll-mt-24" {...props}>
           {children}
@@ -197,7 +223,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       );
     },
     h2: ({ node, children, ...props }: any) => {
-      const id = headingSlugger(nodeToText(children));
+      const id = makeSlug(nodeToText(children), headingSeenRef.current);
       return (
         <h2 id={id} className="text-2xl mt-10 mb-4 scroll-mt-24" {...props}>
           {children}
@@ -205,7 +231,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       );
     },
     h3: ({ node, children, ...props }: any) => {
-      const id = headingSlugger(nodeToText(children));
+      const id = makeSlug(nodeToText(children), headingSeenRef.current);
       return (
         <h3 id={id} className="text-xl mt-8 mb-3 scroll-mt-24" {...props}>
           {children}
@@ -265,6 +291,32 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
         </figure>
       );
     },
+    ul: ({ node, children, ...props }: any) => (
+      <ul className="list-disc ml-6 my-4 space-y-2" {...props}>{children}</ul>
+    ),
+    ol: ({ node, children, ...props }: any) => (
+      <ol className="list-decimal ml-6 my-4 space-y-2" {...props}>{children}</ol>
+    ),
+    li: ({ node, children, ...props }: any) => (
+      <li className="text-neutral-700 leading-relaxed" {...props}>{children}</li>
+    ),
+    p: ({ node, children, ...props }: any) => (
+      <p className="text-neutral-700 leading-relaxed my-4" {...props}>{children}</p>
+    ),
+    a: (props: any) => {
+      const href = props.href;
+      const isExternal = href?.startsWith('http');
+      return (
+        <a
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+          className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
+        >
+          {props.children}
+        </a>
+      );
+    },
   };
 
   return (
@@ -286,7 +338,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               {'date' in data && (
                 <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide">
                   <Calendar size={13} />
-                  {data.date}
+                  {formatDateBritish(data.date)}
                 </div>
               )}
               {'date' in data && (
@@ -297,7 +349,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             </div>
           </header>
 
-          {type === 'project' && 'imageUrl' in data && (
+          {type === 'project' && 'imageUrl' in data && !data.markdown.includes(`](${data.imageUrl})`) && (
             <div className="mt-8 overflow-hidden border border-[#ddd8cf]">
               <button
                 type="button"
@@ -365,7 +417,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
           <aside className="hidden lg:block">
             <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
-              <ol className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading, index) => (
                   <li key={heading.slug} className="flex gap-3 leading-snug">
                     <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
@@ -382,7 +434,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                     </button>
                   </li>
                 ))}
-              </ol>
+              </ul>
             </div>
           </aside>
         )}

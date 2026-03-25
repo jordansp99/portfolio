@@ -1,6 +1,6 @@
 ---
 title: Neural Network Models for Object Recognition
-order: 2
+order: 1
 description: Built and compared a NAS-optimised CNN and a transfer-learned Vision Transformer on CIFAR-10, improving test accuracy from 81.38% to 96.12%.
 tags:
   - Computer Vision

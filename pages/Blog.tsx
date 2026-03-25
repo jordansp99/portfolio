@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
 import { BLOG_POSTS } from '../constants';
 
+const formatDateBritish = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = date.toLocaleDateString('en-GB', { month: 'short' });
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
+
 const Blog: React.FC = () => {
   return (
     <div className="pb-16">
@@ -25,7 +33,7 @@ const Blog: React.FC = () => {
 
               <p className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
                 <Calendar size={13} />
-                {post.date}
+                {formatDateBritish(post.date)}
               </p>
 
               <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
