@@ -204,7 +204,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     h1: ({ node, children, ...props }: any) => {
       const id = renderSlugger(nodeToText(children));
       return (
-        <h1 id={id} className="text-3xl mt-10 mb-5 scroll-mt-24" {...props}>
+        <h1 id={id} className="text-3xl md:text-4xl font-bold mt-16 mb-8 scroll-mt-24 text-neutral-900" {...props}>
           {children}
         </h1>
       );
@@ -215,13 +215,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       const number = headingIndex !== -1 ? String(headingIndex + 1).padStart(2, '0') : null;
 
       return (
-        <h2 id={id} className="text-2xl mt-12 mb-6 scroll-mt-24 flex items-start gap-4 group" {...props}>
+        <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
           {number && (
-            <span className="font-mono text-xs text-neutral-400 shrink-0 mt-2.5 select-none tracking-widest">
+            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-0.5 select-none tracking-tighter">
               {number}
             </span>
           )}
-          <span className="flex-1">{children}</span>
+          <span className="flex-1 leading-tight">{children}</span>
         </h2>
       );
     },
@@ -231,13 +231,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       const number = headingIndex !== -1 ? String(headingIndex + 1).padStart(2, '0') : null;
 
       return (
-        <h3 id={id} className="text-xl mt-10 mb-4 scroll-mt-24 flex items-start gap-4 group" {...props}>
+        <h3 id={id} className="text-xl md:text-2xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-4 group text-neutral-800" {...props}>
           {number && (
-            <span className="font-mono text-[10px] text-neutral-400 shrink-0 mt-2 select-none tracking-widest">
+            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-2 select-none tracking-[0.2em] border-l-2 border-neutral-300 pl-4 uppercase">
               {number}
             </span>
           )}
-          <span className="flex-1">{children}</span>
+          <span className="flex-1 leading-tight">{children}</span>
         </h3>
       );
     },
@@ -423,13 +423,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading, index) => (
                   <li key={heading.slug} className="flex items-start gap-4">
-                    <span className="font-mono text-[10px] text-neutral-400 mt-1.5 shrink-0 select-none tracking-widest">
+                    <span className="font-mono text-[10px] text-neutral-900 font-bold mt-1.5 shrink-0 select-none tracking-widest border-b border-neutral-900 pb-0.5">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <button
                       type="button"
                       onClick={() => scrollToHeading(heading.slug)}
-                      className={`text-sm underline underline-offset-4 transition-colors ${
+                      className={`text-sm underline underline-offset-4 transition-colors font-medium ${
                         heading.level === 3 ? 'text-blue-600 hover:text-blue-700' : 'text-blue-700 hover:text-blue-800'
                       } text-left leading-relaxed`}
                     >
