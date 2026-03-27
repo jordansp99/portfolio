@@ -11,8 +11,6 @@ tags:
 imageUrl: /projects/neural-network-object-recognition/cifar10-examples-by-class.png
 ---
 
-# Neural Network Models for Object Recognition
-
 This project presents a comparative study of two computer vision approaches for object recognition on CIFAR-10: a custom convolutional neural network (CNN) optimised through Neural Architecture Search (NAS), and a transfer-learning pipeline based on a pre-trained Vision Transformer (ViT). The objective was to build a robust image classifier that generalises well to unseen data, while evaluating the practical trade-offs between training from scratch and adapting a large pre-trained model. The resulting workflow is applicable to real-world scenarios such as vehicle recognition in traffic footage, product sorting in warehouses, and assistive object detection for visually impaired users.
 
 *Tip: Click any image to zoom in.*
