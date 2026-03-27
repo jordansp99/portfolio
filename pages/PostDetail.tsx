@@ -438,8 +438,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading) => (
-                  <li key={heading.slug} className={`flex items-baseline gap-3 group ${heading.level === 3 ? 'ml-6' : ''}`}>
-                    <span className={`font-mono text-[10px] font-bold shrink-0 select-none tracking-widest ${
+                  <li key={heading.slug} className={`flex items-start gap-3 group ${heading.level === 3 ? 'ml-6' : ''}`}>
+                    <span className={`font-mono text-[10px] font-bold mt-1 shrink-0 select-none tracking-widest ${
                       heading.level === 3 ? 'text-neutral-400 border-b border-neutral-300' : 'text-neutral-900 border-b border-neutral-900'
                     } pb-0.5`}>
                       {(heading as any).number}
