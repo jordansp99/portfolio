@@ -175,7 +175,23 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const allHeadings = React.useMemo(() => {
     return extractHeadings(data.markdown);
   }, [data.markdown]);
-  const headings = React.useMemo(() => allHeadings.filter((h) => h.level >= 2), [allHeadings]);
+
+  const headings = React.useMemo(() => {
+    let h2Count = 0;
+    let h3Count = 0;
+    return allHeadings
+      .filter((h) => h.level >= 2)
+      .map((h) => {
+        if (h.level === 2) {
+          h2Count++;
+          h3Count = 0;
+          return { ...h, number: String(h2Count).padStart(2, '0') };
+        }
+        h3Count++;
+        return { ...h, number: `${String(h2Count).padStart(2, '0')}.${h3Count}` };
+      });
+  }, [allHeadings]);
+
   const contentBlocks = React.useMemo(() => splitMarkdownTables(data.markdown), [data.markdown]);
   const [lightboxImage, setLightboxImage] = React.useState<{ src: string; alt: string } | null>(null);
 
@@ -211,8 +227,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     },
     h2: ({ node, children, ...props }: any) => {
       const id = renderSlugger(nodeToText(children));
-      const headingIndex = headings.findIndex((h) => h.slug === id);
-      const number = headingIndex !== -1 ? String(headingIndex + 1).padStart(2, '0') : null;
+      const heading = (headings as any[]).find((h) => h.slug === id);
+      const number = heading?.number;
 
       return (
         <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
@@ -227,13 +243,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     },
     h3: ({ node, children, ...props }: any) => {
       const id = renderSlugger(nodeToText(children));
-      const headingIndex = headings.findIndex((h) => h.slug === id);
-      const number = headingIndex !== -1 ? String(headingIndex + 1).padStart(2, '0') : null;
+      const heading = (headings as any[]).find((h) => h.slug === id);
+      const number = heading?.number;
 
       return (
-        <h3 id={id} className="text-xl md:text-2xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-4 group text-neutral-800" {...props}>
+        <h3 id={id} className="text-lg md:text-xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-4 group text-neutral-800" {...props}>
           {number && (
-            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-2.5 select-none tracking-[0.2em] border-l-2 border-neutral-300 pl-4 uppercase">
+            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-1.5 select-none tracking-[0.1em] border-b border-neutral-300 pb-0.5">
               {number}
             </span>
           )}
@@ -421,16 +437,18 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
-                {headings.map((heading, index) => (
-                  <li key={heading.slug} className="flex items-start gap-4 group">
-                    <span className="font-mono text-[10px] text-neutral-900 font-bold mt-1 shrink-0 select-none tracking-widest border-b border-neutral-900 pb-0.5">
-                      {String(index + 1).padStart(2, '0')}
+                {headings.map((heading) => (
+                  <li key={heading.slug} className={`flex items-start gap-4 group ${heading.level === 3 ? 'ml-6' : ''}`}>
+                    <span className={`font-mono text-[10px] font-bold mt-1 shrink-0 select-none tracking-widest ${
+                      heading.level === 3 ? 'text-neutral-400 border-b border-neutral-300' : 'text-neutral-900 border-b border-neutral-900'
+                    } pb-0.5`}>
+                      {(heading as any).number}
                     </span>
                     <button
                       type="button"
                       onClick={() => scrollToHeading(heading.slug)}
-                      className={`text-sm underline underline-offset-4 transition-colors font-medium ${
-                        heading.level === 3 ? 'text-blue-600 hover:text-blue-700' : 'text-blue-700 hover:text-blue-800'
+                      className={`text-sm underline underline-offset-4 transition-colors ${
+                        heading.level === 3 ? 'text-neutral-500 hover:text-neutral-800 font-normal' : 'text-blue-700 hover:text-blue-800 font-medium'
                       } text-left leading-tight`}
                     >
                       {heading.text}
