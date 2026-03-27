@@ -217,7 +217,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       return (
         <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
           {number && (
-            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-0.5 select-none tracking-tighter">
+            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-1 select-none tracking-tighter">
               {number}
             </span>
           )}
@@ -233,7 +233,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       return (
         <h3 id={id} className="text-xl md:text-2xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-4 group text-neutral-800" {...props}>
           {number && (
-            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-2 select-none tracking-[0.2em] border-l-2 border-neutral-300 pl-4 uppercase">
+            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-2.5 select-none tracking-[0.2em] border-l-2 border-neutral-300 pl-4 uppercase">
               {number}
             </span>
           )}
@@ -422,8 +422,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading, index) => (
-                  <li key={heading.slug} className="flex items-start gap-4">
-                    <span className="font-mono text-[10px] text-neutral-900 font-bold mt-1.5 shrink-0 select-none tracking-widest border-b border-neutral-900 pb-0.5">
+                  <li key={heading.slug} className="flex items-start gap-4 group">
+                    <span className="font-mono text-[10px] text-neutral-900 font-bold mt-1 shrink-0 select-none tracking-widest border-b border-neutral-900 pb-0.5">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <button
@@ -431,7 +431,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                       onClick={() => scrollToHeading(heading.slug)}
                       className={`text-sm underline underline-offset-4 transition-colors font-medium ${
                         heading.level === 3 ? 'text-blue-600 hover:text-blue-700' : 'text-blue-700 hover:text-blue-800'
-                      } text-left leading-relaxed`}
+                      } text-left leading-tight`}
                     >
                       {heading.text}
                     </button>
