@@ -49,13 +49,6 @@ const createSlugger = () => {
   };
 };
 
-const makeSlug = (text: string, seen: Map<string, number>): string => {
-  const base = slugify(text) || 'section';
-  const count = seen.get(base) ?? 0;
-  seen.set(base, count + 1);
-  return count === 0 ? base : `${base}-${count}`;
-};
-
 const formatDateBritish = (dateStr: string): string => {
   const date = new Date(dateStr);
   const day = String(date.getDate()).padStart(2, '0');
@@ -64,7 +57,8 @@ const formatDateBritish = (dateStr: string): string => {
   return `${day} ${month} ${year}`;
 };
 
-const extractHeadings = (markdown: string, seen: Map<string, number>): TocHeading[] => {
+const extractHeadings = (markdown: string): TocHeading[] => {
+  const slugger = createSlugger();
   return markdown
     .split('\n')
     .map((line) => line.match(/^(#{1,6})\s+(.+)$/))
@@ -72,7 +66,7 @@ const extractHeadings = (markdown: string, seen: Map<string, number>): TocHeadin
     .map((match) => {
       const level = match[1].length;
       const text = match[2].trim();
-      return { level, text, slug: makeSlug(text, seen) };
+      return { level, text, slug: slugger(text) };
     })
     .filter((heading) => heading.level >= 1 && heading.level <= 3);
 };
@@ -178,10 +172,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
   const listPath = type === 'blog' ? '/blog' : '/projects';
   const listLabel = type === 'blog' ? 'Blog' : 'Projects';
 
-  const headingSeenRef = React.useRef(new Map<string, number>());
   const allHeadings = React.useMemo(() => {
-    headingSeenRef.current = new Map<string, number>();
-    return extractHeadings(data.markdown, headingSeenRef.current);
+    return extractHeadings(data.markdown);
   }, [data.markdown]);
   const headings = React.useMemo(() => allHeadings.filter((h) => h.level >= 2), [allHeadings]);
   const contentBlocks = React.useMemo(() => splitMarkdownTables(data.markdown), [data.markdown]);
@@ -193,13 +185,6 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
-    }
-    const headings = document.querySelectorAll('article h1, article h2, article h3');
-    for (const h of headings) {
-      if (h.id === slug) {
-        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
     }
   };
   const closeLightbox = () => setLightboxImage(null);
@@ -213,9 +198,11 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [lightboxImage]);
 
+  const renderSlugger = createSlugger();
+
   const markdownComponents = {
     h1: ({ node, children, ...props }: any) => {
-      const id = makeSlug(nodeToText(children), headingSeenRef.current);
+      const id = renderSlugger(nodeToText(children));
       return (
         <h1 id={id} className="text-3xl mt-10 mb-5 scroll-mt-24" {...props}>
           {children}
@@ -223,7 +210,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       );
     },
     h2: ({ node, children, ...props }: any) => {
-      const id = makeSlug(nodeToText(children), headingSeenRef.current);
+      const id = renderSlugger(nodeToText(children));
       return (
         <h2 id={id} className="text-2xl mt-10 mb-4 scroll-mt-24" {...props}>
           {children}
@@ -231,7 +218,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       );
     },
     h3: ({ node, children, ...props }: any) => {
-      const id = makeSlug(nodeToText(children), headingSeenRef.current);
+      const id = renderSlugger(nodeToText(children));
       return (
         <h3 id={id} className="text-xl mt-8 mb-3 scroll-mt-24" {...props}>
           {children}
@@ -419,16 +406,16 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading, index) => (
-                  <li key={heading.slug} className="flex gap-3 leading-snug">
-                    <span className="font-mono text-xs text-neutral-500 pt-1">{String(index + 1).padStart(2, '0')}</span>
+                  <li key={heading.slug} className="flex items-start gap-3">
+                    <span className="font-mono text-[10px] text-neutral-500 mt-1 shrink-0">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                     <button
                       type="button"
                       onClick={() => scrollToHeading(heading.slug)}
                       className={`text-sm underline underline-offset-4 transition-colors ${
-                        heading.level === 3
-                          ? 'text-blue-600 hover:text-blue-700'
-                          : 'text-blue-700 hover:text-blue-800'
-                      } text-left`}
+                        heading.level === 3 ? 'text-blue-600 hover:text-blue-700' : 'text-blue-700 hover:text-blue-800'
+                      } text-left leading-snug`}
                     >
                       {heading.text}
                     </button>
