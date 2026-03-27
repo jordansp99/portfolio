@@ -231,9 +231,9 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       const number = heading?.number;
 
       return (
-        <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
+        <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-4 md:gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
           {number && (
-            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-1 select-none tracking-tighter">
+            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-1 md:mt-1.5 select-none tracking-tighter">
               {number}
             </span>
           )}
@@ -247,9 +247,9 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       const number = heading?.number;
 
       return (
-        <h3 id={id} className="text-lg md:text-xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-4 group text-neutral-800" {...props}>
+        <h3 id={id} className="text-lg md:text-xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-3 md:gap-4 group text-neutral-800" {...props}>
           {number && (
-            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-1.5 select-none tracking-[0.1em] border-b border-neutral-300 pb-0.5">
+            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-1.5 md:mt-2 select-none tracking-[0.1em] border-b border-neutral-300 pb-0.5">
               {number}
             </span>
           )}
@@ -438,8 +438,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
               <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading) => (
-                  <li key={heading.slug} className={`flex items-start gap-4 group ${heading.level === 3 ? 'ml-6' : ''}`}>
-                    <span className={`font-mono text-[10px] font-bold mt-1 shrink-0 select-none tracking-widest ${
+                  <li key={heading.slug} className={`flex items-baseline gap-3 group ${heading.level === 3 ? 'ml-6' : ''}`}>
+                    <span className={`font-mono text-[10px] font-bold shrink-0 select-none tracking-widest ${
                       heading.level === 3 ? 'text-neutral-400 border-b border-neutral-300' : 'text-neutral-900 border-b border-neutral-900'
                     } pb-0.5`}>
                       {(heading as any).number}
