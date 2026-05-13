@@ -109,10 +109,10 @@ export const PUBLICATIONS: Publication[] = [
   {
     title: "Adapting Whisper for Regional Dialects: Enhancing Public Services for Vulnerable Populations in the United Kingdom",
     authors: "Torgbi, M., Clayman, A., Speight, J.J. and Madabushi, H.T.",
-    venue: "arXiv preprint arXiv:2501.08502",
+    venue: "ACL Anthology",
     year: "2025",
     month: "Jan",
-    link: "https://arxiv.org/abs/2501.08502"
+    link: "https://aclanthology.org/2025.vardial-1.4/"
   },
   {
     title: "Inclusive ASR for Critical Public Services: Debiasing with Actor-Simulated Speech",
