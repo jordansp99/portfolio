@@ -74,7 +74,7 @@ const extractHeadings = (markdown: string): TocHeading[] => {
 const nodeToText = (node: React.ReactNode): string => {
   if (typeof node === 'string' || typeof node === 'number') return String(node);
   if (Array.isArray(node)) return node.map(nodeToText).join('');
-  if (React.isValidElement(node)) return nodeToText(node.props.children);
+  if (React.isValidElement<{children?: React.ReactNode}>(node)) return nodeToText(node.props.children);
   return '';
 };
 
