@@ -13,10 +13,10 @@ const Projects: React.FC = () => {
 
       <div className="space-y-8">
         {filteredProjects.map((project) => (
-          <article key={project.id} className="border-b border-[#e5e1d9] pb-8">
+          <article key={project.id} className="border-b border-[#e5e1d9] pb-8 pl-5 -ml-5 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
             <div className="space-y-4 flex flex-col items-start">
               <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                <Link to={`/projects/${project.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+                <Link to={`/projects/${project.id}`} className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
                   {project.title}
                 </Link>
               </h2>

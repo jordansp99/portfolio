@@ -36,7 +36,7 @@ const Home: React.FC = () => {
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Experience</p>
         <div className="space-y-6">
           {EXPERIENCES.map((exp, idx) => (
-            <article key={idx} className="border-b border-[#e5e1d9] pb-5">
+            <article key={idx} className="border-b border-[#e5e1d9] pb-5 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
               <h2 className="text-2xl tracking-tight">{exp.role}</h2>
               <p className="mt-1 text-neutral-600">{exp.company}</p>
               <p className="mt-1 font-mono text-xs uppercase tracking-wide text-neutral-500">{exp.period}</p>
@@ -49,14 +49,14 @@ const Home: React.FC = () => {
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Publications</p>
         <div className="space-y-5">
           {PUBLICATIONS.map((pub, idx) => (
-            <article key={idx} className="border-b border-[#e5e1d9] pb-4">
+            <article key={idx} className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
               {pub.link ? (
                 <h3 className="text-xl tracking-tight leading-snug">
                   <a
                     href={pub.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
+                    className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all"
                   >
                     {pub.title}
                   </a>
@@ -76,10 +76,10 @@ const Home: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Explore</p>
         <div className="flex flex-col sm:flex-row gap-6 text-xl">
-          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+          <Link to="/projects" className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
             Projects
           </Link>
-          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+          <Link to="/blog" className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
             Blog
           </Link>
         </div>
