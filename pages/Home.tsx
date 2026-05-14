@@ -56,7 +56,7 @@ const Home: React.FC = () => {
                     href={pub.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all"
+                    className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
                   >
                     {pub.title}
                   </a>
@@ -76,10 +76,10 @@ const Home: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Explore</p>
         <div className="flex flex-col sm:flex-row gap-6 text-xl">
-          <Link to="/projects" className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
+          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Projects
           </Link>
-          <Link to="/blog" className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
+          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Blog
           </Link>
         </div>

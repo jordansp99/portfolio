@@ -26,7 +26,7 @@ const Blog: React.FC = () => {
           return (
             <article key={post.id} className="border-b border-[#e5e1d9] pb-9 pl-5 -ml-5 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
               <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                <Link to={`/blog/${post.id}`} className="text-neutral-900 underline underline-offset-4 decoration-neutral-400 hover:decoration-neutral-900 transition-all">
+                <Link to={`/blog/${post.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
                   {post.title}
                 </Link>
               </h2>
