@@ -8,10 +8,10 @@ const Home: React.FC = () => {
       <section className="pt-2 md:pt-4 border-b border-[#ddd8cf] pb-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Profile</p>
         <h1 className="mt-3 text-4xl md:text-6xl leading-[1.05] tracking-tight max-w-3xl">
-          Welcome to my corner of the internet.
+          PhD Researcher in Robotics &amp; AI
         </h1>
         <p className="mt-5 text-lg text-neutral-600 max-w-2xl leading-relaxed">
-          I am Jordan Speight, a PhD researcher with the RAINZ CDT.
+          I am Jordan Speight, a PhD researcher with the RAINZ CDT at the University of Manchester.
           My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
         </p>
         <p className="mt-3 text-neutral-600 max-w-2xl leading-relaxed">
