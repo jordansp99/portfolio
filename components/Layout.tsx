@@ -46,7 +46,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-[#f6f5f2] text-neutral-900 selection:bg-neutral-900 selection:text-[#f6f5f2]">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 grid grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)] gap-10 md:gap-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 grid grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)] gap-10 md:gap-12">
         <aside className="md:sticky md:top-10 md:self-start md:-ml-4 lg:-ml-6 border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
           <div className="mb-5 overflow-hidden border-2 border-neutral-300 bg-[#efebe3]">
             <img
