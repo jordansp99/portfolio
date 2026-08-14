@@ -81,8 +81,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`font-mono text-xs uppercase tracking-wide border-l-2 pl-3 py-1.5 transition-all ${
                     isActive
-                      ? 'border-l-4 border-blue-700 text-blue-700 font-semibold'
-                      : 'border-l-2 border-transparent text-neutral-500 hover:text-neutral-900 hover:border-l-neutral-400'
+                      ? 'border-l-4 border-teal-700 text-teal-800 font-semibold'
+                      : 'border-l-2 border-transparent text-neutral-500 hover:text-teal-800 hover:border-l-teal-600'
                   }`}
                 >
                   {link.name}

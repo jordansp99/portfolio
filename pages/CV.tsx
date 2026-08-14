@@ -25,7 +25,7 @@ const CV: React.FC = () => {
             <div key={i} className="relative pl-8 border-l-4 border-black">
               <div className="absolute -left-[14px] top-0 w-6 h-6 bg-white border-4 border-black rounded-full"></div>
               <div className="space-y-2">
-                <span className="text-lg font-black bg-blue-100 px-2 border-2 border-black">{exp.period}</span>
+                <span className="text-lg font-black bg-teal-100 px-2 border-2 border-black">{exp.period}</span>
                 <h3 className="text-2xl font-black">{exp.role} @ {exp.company}</h3>
                 <ul className="list-disc list-inside font-bold space-y-2 text-gray-700">
                   {exp.description.map((item, j) => (
@@ -50,10 +50,10 @@ const CV: React.FC = () => {
               <h3 className="text-xl font-black">{pub.title}</h3>
               <p className="font-bold text-gray-600 italic mt-2">{pub.authors}</p>
               <div className="flex flex-wrap items-center gap-4 mt-4">
-                <span className="bg-blue-100 border-2 border-black px-2 py-0.5 text-sm font-black uppercase">{pub.venue}</span>
+                <span className="bg-teal-100 border-2 border-black px-2 py-0.5 text-sm font-black uppercase">{pub.venue}</span>
                 <span className="font-black text-gray-400">{pub.month && `${pub.month} `}{pub.year}</span>
                 {pub.link && (
-                  <a href={pub.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 font-black hover:underline">
+                  <a href={pub.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-teal-700 font-black hover:underline">
                     VIEW <ExternalLink size={14} />
                   </a>
                 )}

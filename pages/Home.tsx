@@ -31,7 +31,7 @@ const Home: React.FC = () => {
             Education
           </p>
           <div className="space-y-3">
-            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-base font-medium tracking-tight text-neutral-900">PhD Robotics &amp; AI</h3>
                 <span className="font-mono text-[11px] text-neutral-500 shrink-0">Sept 2025–Pres</span>
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
               <p className="text-xs text-neutral-600 mt-0.5">University of Manchester</p>
             </article>
 
-            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-base font-medium tracking-tight text-neutral-900">MSc. AI</h3>
                 <span className="font-mono text-[11px] text-neutral-500 shrink-0">Jan 2025–Pres</span>
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
               <p className="text-xs text-neutral-600 mt-0.5">University Of Essex</p>
             </article>
 
-            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+            <article className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex items-baseline justify-between gap-2">
                 <h3 className="text-base font-medium tracking-tight text-neutral-900">B.A. Modern Languages</h3>
                 <span className="font-mono text-[11px] text-neutral-500 shrink-0">2016–2020</span>
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
           </p>
           <div className="space-y-3">
             {EXPERIENCES.map((exp, idx) => (
-              <article key={idx} className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+              <article key={idx} className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
                 <div className="flex items-baseline justify-between gap-2">
                   <h3 className="text-base font-medium tracking-tight text-neutral-900">{exp.role}</h3>
                   <span className="font-mono text-[11px] text-neutral-500 shrink-0">{exp.period}</span>
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
           </p>
           <div className="space-y-3">
             {PUBLICATIONS.map((pub, idx) => (
-              <article key={idx} className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+              <article key={idx} className="border-b border-[#e5e1d9] pb-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="font-mono text-[11px] text-neutral-500 font-medium">{pub.venue}</span>
                   <span className="font-mono text-[11px] text-neutral-500 shrink-0">{pub.year}</span>
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
                       href={pub.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
+                      className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors inline-flex items-center gap-1"
                     >
                       <span>{pub.title}</span>
                       <ExternalLink size={12} className="shrink-0 opacity-70" />
@@ -112,10 +112,10 @@ const Home: React.FC = () => {
       <section className="flex items-center justify-between pt-1">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Explore</p>
         <div className="flex items-center gap-6 text-base md:text-lg">
-          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+          <Link to="/projects" className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors">
             Projects
           </Link>
-          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+          <Link to="/blog" className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors">
             Blog
           </Link>
         </div>
