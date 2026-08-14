@@ -162,7 +162,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       <div className="flex flex-col items-center justify-center py-32 text-center space-y-4">
         <h1 className="text-6xl font-medium text-neutral-900">404</h1>
         <p className="font-mono text-neutral-500">Content not found</p>
-        <Link to="/" className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors">
+        <Link to="/" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
           Return Home
         </Link>
       </div>
@@ -330,7 +330,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
           href={href}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors"
+          className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors"
         >
           {props.children}
         </a>
@@ -342,7 +342,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     <article className="max-w-6xl mx-auto pb-20">
       <Link
         to={listPath}
-        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-teal-700 hover:text-teal-800 transition-colors"
+        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-blue-700 hover:text-blue-800 transition-colors"
       >
         <ArrowLeft size={14} />
         Back to {listLabel}
@@ -386,7 +386,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             </div>
           )}
 
-          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-teal-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-teal-800 prose-strong:text-neutral-900">
+          <div className="mt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:font-medium prose-p:leading-relaxed prose-p:text-neutral-700 prose-a:text-blue-700 prose-a:underline prose-a:underline-offset-4 hover:prose-a:text-blue-800 prose-strong:text-neutral-900">
             {contentBlocks.map((block, index) => {
               if (block.type === 'table') {
                 return (
@@ -448,7 +448,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                       type="button"
                       onClick={() => scrollToHeading(heading.slug)}
                       className={`text-sm underline underline-offset-4 transition-colors ${
-                        heading.level === 3 ? 'text-neutral-500 hover:text-neutral-800 font-normal' : 'text-teal-700 hover:text-teal-800 font-medium'
+                        heading.level === 3 ? 'text-neutral-500 hover:text-neutral-800 font-normal' : 'text-blue-700 hover:text-blue-800 font-medium'
                       } text-left leading-tight`}
                     >
                       {heading.text}

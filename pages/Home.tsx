@@ -94,7 +94,7 @@ const Home: React.FC = () => {
                       href={pub.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors inline-flex items-center gap-1.5"
+                      className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors inline-flex items-center gap-1.5"
                     >
                       <span>{pub.title}</span>
                       <ExternalLink size={14} className="shrink-0 opacity-70" />
@@ -117,10 +117,10 @@ const Home: React.FC = () => {
       <section className="flex items-center justify-between pt-2">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Explore</p>
         <div className="flex items-center gap-6 text-lg">
-          <Link to="/projects" className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors">
+          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Projects
           </Link>
-          <Link to="/blog" className="text-teal-700 underline underline-offset-4 hover:text-teal-800 transition-colors">
+          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
             Blog
           </Link>
         </div>

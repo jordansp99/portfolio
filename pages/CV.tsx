@@ -53,7 +53,7 @@ const CV: React.FC = () => {
                 <span className="bg-teal-100 border-2 border-black px-2 py-0.5 text-sm font-black uppercase">{pub.venue}</span>
                 <span className="font-black text-gray-400">{pub.month && `${pub.month} `}{pub.year}</span>
                 {pub.link && (
-                  <a href={pub.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-teal-700 font-black hover:underline">
+                  <a href={pub.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 font-black hover:underline">
                     VIEW <ExternalLink size={14} />
                   </a>
                 )}
