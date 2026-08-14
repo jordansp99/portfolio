@@ -19,29 +19,33 @@ const Blog: React.FC = () => {
       </header>
 
       <div className="mt-10 space-y-10">
-        {BLOG_POSTS.map((post) => {
-          const year = new Date(post.date).getFullYear();
-          const metaLine = [...post.tags, String(year)].join(', ');
+        {BLOG_POSTS.length === 0 ? (
+          <p className="text-neutral-500 font-mono text-sm">No blog posts published yet.</p>
+        ) : (
+          BLOG_POSTS.map((post) => {
+            const year = new Date(post.date).getFullYear();
+            const metaLine = [...post.tags, String(year)].join(', ');
 
-          return (
-            <article key={post.id} className="border-b border-[#e5e1d9] pb-9 pl-5 -ml-5 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
-              <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
-                <Link to={`/blog/${post.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
-                  {post.title}
-                </Link>
-              </h2>
+            return (
+              <article key={post.id} className="border-b border-[#e5e1d9] pb-9 pl-5 -ml-5 border-l-2 border-l-transparent hover:border-l-neutral-900 transition-colors">
+                <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
+                  <Link to={`/blog/${post.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
+                    {post.title}
+                  </Link>
+                </h2>
 
-              <p className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
-                <Calendar size={13} />
-                {formatDateBritish(post.date)}
-              </p>
+                <p className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
+                  <Calendar size={13} />
+                  {formatDateBritish(post.date)}
+                </p>
 
-              <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
+                <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
 
-              <p className="mt-4 text-neutral-700 leading-relaxed max-w-4xl">{post.excerpt}</p>
-            </article>
-          );
-        })}
+                <p className="mt-4 text-neutral-700 leading-relaxed max-w-4xl">{post.excerpt}</p>
+              </article>
+            );
+          })
+        )}
       </div>
     </div>
   );
