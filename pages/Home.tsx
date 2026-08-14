@@ -11,14 +11,22 @@ const Home: React.FC = () => {
           Welcome to my corner of the internet.
         </h1>
         <p className="mt-5 text-lg text-neutral-600 max-w-2xl leading-relaxed">
-          I am Jordan Speight, a data scientist focused on machine learning and AI systems.
-          My work focuses on speech and language AI, including ASR, NLP, model evaluation, and practical ML systems for real-world use.
+          I am Jordan Speight, a PhD researcher with the RAINZ CDT.
+          My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
+        </p>
+        <p className="mt-3 text-neutral-600 max-w-2xl leading-relaxed">
+          Previously, my research focused on speech and language AI—investigating ASR debiasing, regional dialect adaptation, and model evaluation for public services.
         </p>
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-[170px_minmax(0,1fr)] gap-6 md:gap-10">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 pt-1">Education</p>
         <div className="space-y-5">
+          <article className="border-b border-[#e5e1d9] pb-5">
+            <h3 className="text-2xl tracking-tight">PhD Robotics and AI</h3>
+            <p className="mt-1 text-neutral-600">University of Manchester</p>
+            <p className="mt-1 font-mono text-xs uppercase tracking-wide text-neutral-500">Sept 2025 to Present</p>
+          </article>
           <article className="border-b border-[#e5e1d9] pb-5">
             <h3 className="text-2xl tracking-tight">MSc. Artificial Intelligence</h3>
             <p className="mt-1 text-neutral-600">University Of Essex</p>

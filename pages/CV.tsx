@@ -72,6 +72,10 @@ const CV: React.FC = () => {
           </div>
           <div className="space-y-6">
             <div className="border-4 border-black p-6 bg-white neo-brutal-shadow">
+              <h3 className="text-xl font-black">PhD Robotics and AI</h3>
+              <p className="font-bold">University of Manchester • Sept 2025 to Present</p>
+            </div>
+            <div className="border-4 border-black p-6 bg-white neo-brutal-shadow">
               <h3 className="text-xl font-black">MSc. Artificial Intelligence</h3>
               <p className="font-bold">University Of Essex • Jan 2025 to Present</p>
             </div>
