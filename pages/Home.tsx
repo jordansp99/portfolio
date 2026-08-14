@@ -16,12 +16,12 @@ const Home: React.FC = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.08] tracking-tight max-w-3xl font-normal text-neutral-900">
           PhD Researcher in Robotics &amp; AI
         </h1>
-        <div className="mt-5 space-y-3 max-w-3xl text-neutral-700 leading-relaxed text-base md:text-lg">
+        <div className="mt-5 space-y-4 max-w-3xl text-neutral-700 leading-relaxed text-base md:text-lg">
           <p>
             I am Jordan Speight, a PhD researcher with the RAINZ CDT at the University of Manchester.
             My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
           </p>
-          <p className="text-neutral-600 text-sm md:text-base">
+          <p>
             Previously, my research focused on speech and language AI, investigating ASR debiasing, regional dialect adaptation, and model evaluation for public services.
           </p>
         </div>
