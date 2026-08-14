@@ -72,20 +72,23 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <p className="mt-2 text-sm text-neutral-600">PhD Researcher</p>
 
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex mt-5 flex-col gap-2`}>
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsMenuOpen(false)}
-                className={`font-mono text-xs uppercase tracking-wide border-l-2 pl-3 py-1.5 transition-all ${
-                  location.pathname === link.path || location.pathname.startsWith(`${link.path}/`)
-                    ? 'border-l-4 border-neutral-900 text-neutral-900 font-medium'
-                    : 'border-l-2 border-transparent text-neutral-500 hover:text-neutral-900 hover:border-l-neutral-400'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(`${link.path}/`));
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`font-mono text-xs uppercase tracking-wide border-l-2 pl-3 py-1.5 transition-all ${
+                    isActive
+                      ? 'border-l-4 border-blue-700 text-blue-700 font-semibold'
+                      : 'border-l-2 border-transparent text-neutral-500 hover:text-neutral-900 hover:border-l-neutral-400'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className={`${isMenuOpen ? 'block' : 'hidden'} md:block mt-6`}>
