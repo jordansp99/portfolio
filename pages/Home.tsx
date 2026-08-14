@@ -22,7 +22,7 @@ const Home: React.FC = () => {
             My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
           </p>
           <p className="text-neutral-600 text-sm md:text-base">
-            Previously, my research focused on speech and language AI—investigating ASR debiasing, regional dialect adaptation, and model evaluation for public services.
+            Previously, my research focused on speech and language AI, investigating ASR debiasing, regional dialect adaptation, and model evaluation for public services.
           </p>
         </div>
       </section>
