@@ -34,7 +34,7 @@ const Home: React.FC = () => {
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                 <h3 className="text-lg tracking-tight text-neutral-900">PhD Robotics and AI</h3>
-                <span className="font-mono text-xs text-neutral-500 shrink-0">Sept 2025 to Present</span>
+                <span className="font-mono text-xs text-neutral-500 shrink-0">Sept 2026 to Present</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University of Manchester</p>
             </article>
