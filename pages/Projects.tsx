@@ -7,13 +7,13 @@ const Projects: React.FC = () => {
 
   return (
     <div className="space-y-10 pb-16">
-      <header className="border-b border-[#ddd8cf] pb-7 pt-2 md:pt-4">
+      <header className="border-b border-[#ddd8cf] pb-8 pt-2 md:pt-4">
         <h1 className="text-4xl md:text-6xl tracking-tight">Projects</h1>
       </header>
 
       <div className="space-y-8">
         {filteredProjects.map((project) => (
-          <article key={project.id} className="border-b border-[#e5e1d9] pb-8 pl-5 -ml-5 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
+          <article key={project.id} className="border-b border-[#e5e1d9] pb-8 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
             <div className="space-y-4 flex flex-col items-start">
               <h2 className="text-3xl md:text-4xl tracking-tight leading-tight">
                 <Link to={`/projects/${project.id}`} className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">

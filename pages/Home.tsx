@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-10 pb-12">
       {/* Profile Section */}
-      <section className="pt-2 border-b border-[#ddd8cf] pb-8">
+      <section className="pt-2 md:pt-4 border-b border-[#ddd8cf] pb-8">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-2">Profile</p>
         <h1 className="text-4xl md:text-5xl leading-[1.1] tracking-tight font-normal text-neutral-900">
           PhD Researcher in Robotics &amp; AI
