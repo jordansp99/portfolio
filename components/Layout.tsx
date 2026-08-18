@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Menu, X } from 'lucide-react';
 import abstractAiImage from '../src/assets/ai-reference.jpg';
 import { BLOG_POSTS, PROJECTS } from '../constants';
 
@@ -148,9 +148,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
-            </a>
-            <a href="mailto:jordanspeight@hotmail.com" className="hover:text-neutral-900 transition-colors" aria-label="Email">
-              <Mail size={18} />
             </a>
           </div>
         </aside>
