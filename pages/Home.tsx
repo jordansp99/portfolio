@@ -17,9 +17,6 @@ const Home: React.FC = () => {
             I am Jordan Speight, a PhD researcher with the RAINZ CDT at the University of Manchester.
             My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
           </p>
-          <p>
-            Previously, my research focused on speech and language AI, investigating ASR debiasing, regional dialect adaptation, and model evaluation for public services.
-          </p>
         </div>
       </section>
 
