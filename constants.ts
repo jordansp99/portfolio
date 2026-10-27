@@ -83,7 +83,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: "Wyser LTD",
     role: "Junior Data Scientist",
-    period: "May 2024 – June 2025",
+    period: "May 2024 to June 2025",
     description: [
       "Collaborated with academic partners on a research project addressing sociolinguistic biases in Automatic Speech Recognition (ASR) models for regional dialects in the UK public service sector.",
       "Delivered the final project presentation to UK Research and Innovation evaluating technical achievements for ASR research project contributing to a highly positive funder review.",
@@ -97,7 +97,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: "TELUS International AI-Data Solutions",
     role: "Data Analyst",
-    period: "Sep 2020 – May 2024",
+    period: "Sept 2020 to May 2024",
     description: [
       "Labelled and annotated AI training data, including map-related data, images and text, to ensure accuracy and relevance for machine learning models.",
       "Ensured all data collection and evaluation processes were consistent with the client’s precise guidelines."

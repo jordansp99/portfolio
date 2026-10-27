@@ -69,7 +69,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
           </div>
 
-          <p className="mt-2 text-sm text-neutral-600">PhD Student</p>
+          <p className="mt-2 text-sm text-neutral-600">PhD student in Robotics and AI for Net Zero at the University of Manchester</p>
 
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex mt-5 flex-col gap-2`}>
             {navLinks.map((link) => {

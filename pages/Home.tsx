@@ -37,15 +37,15 @@ const Home: React.FC = () => {
 
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <h3 className="text-lg tracking-tight text-neutral-900">MSc. Artificial Intelligence</h3>
+                <h3 className="text-lg tracking-tight text-neutral-900">MSc Artificial Intelligence</h3>
                 <span className="font-mono text-xs text-neutral-500 shrink-0">Jan 2025 to Sept 2026</span>
               </div>
-              <p className="mt-1 text-sm text-neutral-600">University Of Essex</p>
+              <p className="mt-1 text-sm text-neutral-600">University of Essex</p>
             </article>
 
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <h3 className="text-lg tracking-tight text-neutral-900">B.A. Modern Languages</h3>
+                <h3 className="text-lg tracking-tight text-neutral-900">BA Modern Languages</h3>
                 <span className="font-mono text-xs text-neutral-500 shrink-0">Sept 2016 to Sept 2020</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University of Birmingham</p>

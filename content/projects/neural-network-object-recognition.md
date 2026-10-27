@@ -57,7 +57,7 @@ To reduce overfitting and improve invariance, I applied on-the-fly augmentation 
 
 ## NAS Outcomes and Selected CNN
 
-The tuner evaluated dozens of candidate configurations. Most trials either plateaued early or showed unstable validation behavior, while a smaller group converged reliably. The selected architecture used three convolutional blocks with max pooling, filter sizes of 128, 64, and 416, a 512-unit dense layer, and a dropout rate of 0.6. Notably, the best-performing setup minimized augmentation complexity by effectively relying on horizontal flips rather than heavier rotation and zoom settings. This final architecture was then trained for 50 epochs.
+The tuner evaluated dozens of candidate configurations. Most trials either plateaued early or showed unstable validation behaviour, while a smaller group converged reliably. The selected architecture used three convolutional blocks with max pooling, filter sizes of 128, 64, and 416, a 512-unit dense layer, and a dropout rate of 0.6. Notably, the best-performing setup minimised augmentation complexity by effectively relying on horizontal flips rather than heavier rotation and zoom settings. This final architecture was then trained for 50 epochs.
 
 ![Hyperparameter performance comparison](/projects/neural-network-object-recognition/hyperparameter-performance-comparison.png)
 
@@ -101,7 +101,7 @@ The ViT confusion matrix showed stronger class separation and fewer off-diagonal
 
 ## Final ViT Result
 
-After training the ViT classification head for 20 epochs, the final test accuracy reached **96.12%**, representing an improvement of nearly **15 percentage points** over the NAS-optimized CNN baseline.
+After training the ViT classification head for 20 epochs, the final test accuracy reached **96.12%**, representing an improvement of nearly **15 percentage points** over the NAS-optimised CNN baseline.
 
 ## Conclusion and Future Work
 

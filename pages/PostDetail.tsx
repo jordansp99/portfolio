@@ -266,7 +266,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
       if (isInline) {
         return (
-          <code className="bg-transparent border border-[#d8d3cb] text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" {...props}>
+          <code className="bg-transparent border border-[#d8d3cb] text-neutral-800 px-1 py-0.5 rounded-sm text-[0.9em]" style={{ fontFamily: "'Courier New', monospace" }} {...props}>
             {children}
           </code>
         );
