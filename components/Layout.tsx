@@ -46,30 +46,31 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-[#f6f5f2] text-neutral-900 selection:bg-neutral-900 selection:text-[#f6f5f2]">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8 grid grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)] gap-10 md:gap-12">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 py-6 md:py-10 grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] gap-8 md:gap-12">
         <aside className="md:sticky md:top-10 md:self-start md:-ml-4 lg:-ml-6 border-b md:border-b-0 pb-6 md:pb-0 border-[#ddd8cf]">
-          <div className="mb-5 overflow-hidden border-2 border-neutral-300 bg-[#efebe3]">
+          <div className="mb-5 overflow-hidden rounded-sm border border-[#d8d3cb] bg-[#efebe3]">
             <img
               src={abstractAiImage}
               alt="Abstract AI visual"
-              className="w-full h-28 object-cover opacity-90"
+              className="w-full h-32 object-cover"
             />
           </div>
 
           <div className="flex items-center justify-between md:block">
-            <Link to="/" className="text-lg tracking-tight font-medium hover:opacity-70 transition-opacity">
+            <Link to="/" className="text-xl tracking-tight font-semibold hover:text-teal-800 transition-colors">
               Jordan Speight
             </Link>
             <button
               className="md:hidden p-2 border border-[#d0ccc4] rounded"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
 
-          <p className="mt-2 text-sm text-neutral-600">PhD student in Robotics and AI for Net Zero at the University of Manchester</p>
+          <p className="mt-1 text-sm text-neutral-600">PhD student</p>
 
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex mt-5 flex-col gap-2`}>
             {navLinks.map((link) => {
@@ -79,10 +80,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`font-mono text-xs uppercase tracking-wide border-l-2 pl-3 py-1.5 transition-colors ${
+                  className={`text-xs uppercase tracking-wider border-l-2 px-3 py-2 transition-colors ${
                     isActive
-                      ? 'border-teal-700 text-teal-800 font-semibold'
-                      : 'border-transparent text-neutral-500 hover:text-teal-800 hover:border-teal-600'
+                      ? 'border-teal-700 bg-[#e7eeeb] text-teal-900 font-semibold'
+                      : 'border-transparent text-neutral-600 hover:text-teal-800 hover:border-teal-600'
                   }`}
                 >
                   {link.name}
@@ -92,7 +93,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </nav>
 
           <div className={`${isMenuOpen ? 'block' : 'hidden'} md:block mt-6`}>
-            <label htmlFor="site-search" className="font-mono text-xs uppercase tracking-wide text-neutral-500">
+            <label htmlFor="site-search" className="text-xs uppercase tracking-wide text-neutral-500">
               Search
             </label>
             <input
@@ -101,7 +102,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search projects and posts"
-              className="mt-2 w-full border border-[#d8d3cb] bg-[#fbfaf7] px-3 py-2 text-sm text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900"
+              className="mt-2 w-full rounded-sm border border-[#d8d3cb] bg-[#fbfaf7] px-3 py-2.5 text-sm text-neutral-800 placeholder:text-neutral-500 focus:outline-none focus:border-teal-700 focus:ring-1 focus:ring-teal-700"
             />
             {searchQuery.trim().length > 0 && (
               <div className="mt-3 border border-[#ddd8cf] bg-[#fbfaf7]">
@@ -118,7 +119,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                           className="block px-3 py-2 hover:bg-[#f1ede6] transition-colors"
                         >
                           <p className="text-sm text-neutral-800 leading-snug">{result.label}</p>
-                          <p className="font-mono text-[10px] uppercase tracking-wide text-neutral-500 mt-1">{result.type}</p>
+                          <p className="text-[10px] uppercase tracking-wide text-neutral-500 mt-1">{result.type}</p>
                         </Link>
                       </li>
                     ))}
@@ -130,7 +131,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             )}
           </div>
 
-          <div className="mt-6 flex gap-4 text-neutral-500">
+          <div className="mt-6 flex gap-5 text-neutral-600">
             <a
               href="https://orcid.org/my-orcid?orcid=0009-0008-0832-6028"
               target="_blank"
@@ -164,11 +165,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
         </aside>
 
-        <main className="min-w-0 border-l-2 border-[#ddd8cf] pl-0 md:pl-10">{children}</main>
+        <main className="min-w-0 md:border-l md:border-[#ddd8cf] md:pl-10">{children}</main>
       </div>
 
       <footer className="border-t border-[#ddd8cf] text-neutral-500">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 font-mono text-[11px] uppercase tracking-wider">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 text-[11px] uppercase tracking-wider">
           {new Date().getFullYear()} Jordan Speight
         </div>
       </footer>

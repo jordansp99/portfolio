@@ -6,12 +6,12 @@ const Home: React.FC = () => {
   return (
     <div className="space-y-10 pb-12">
       {/* Profile Section */}
-      <section className="pt-2 md:pt-4 border-b border-[#ddd8cf] pb-8">
-        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-2">Profile</p>
-        <h1 className="text-4xl md:text-5xl leading-[1.1] tracking-tight font-normal text-neutral-900">
+      <section className="pt-1 md:pt-3 border-b border-[#ddd8cf] pb-10">
+        <p className="text-xs uppercase tracking-widest font-semibold text-teal-800 mb-4">Profile</p>
+        <h1 className="text-4xl md:text-5xl leading-[1.1] tracking-tight font-normal text-neutral-900 max-w-3xl">
           PhD Student in Robotics &amp; AI
         </h1>
-        <div className="mt-4 space-y-3 text-neutral-700 leading-relaxed text-base md:text-lg max-w-4xl">
+        <div className="mt-5 space-y-3 text-neutral-700 leading-relaxed text-base md:text-lg max-w-3xl">
           <p>
             I am Jordan Speight, a PhD student with the RAINZ CDT at the University of Manchester.
             My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
@@ -23,30 +23,30 @@ const Home: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 border-b border-[#ddd8cf] pb-8">
         {/* Education */}
         <div>
-          <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-4 pb-2 border-b border-[#e5e1d9]">
+          <p className="text-xs uppercase tracking-widest font-semibold text-teal-800 mb-5 pb-3 border-b border-[#d5ded9]">
             Education
           </p>
           <div className="space-y-4">
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-1">
                 <h3 className="text-lg tracking-tight text-neutral-900">PhD Robotics and AI</h3>
-                <span className="font-mono text-xs text-neutral-500 shrink-0">Sept 2026 to Present</span>
+                <span className="text-xs text-neutral-500 shrink-0">Sept 2026 to Present</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University of Manchester</p>
             </article>
 
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-1">
                 <h3 className="text-lg tracking-tight text-neutral-900">MSc Artificial Intelligence</h3>
-                <span className="font-mono text-xs text-neutral-500 shrink-0">Jan 2025 to Sept 2026</span>
+                <span className="text-xs text-neutral-500 shrink-0">Jan 2025 to Sept 2026</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University of Essex</p>
             </article>
 
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-1">
                 <h3 className="text-lg tracking-tight text-neutral-900">BA Modern Languages</h3>
-                <span className="font-mono text-xs text-neutral-500 shrink-0">Sept 2016 to Sept 2020</span>
+                <span className="text-xs text-neutral-500 shrink-0">Sept 2016 to Sept 2020</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University of Birmingham</p>
             </article>
@@ -55,15 +55,15 @@ const Home: React.FC = () => {
 
         {/* Experience */}
         <div>
-          <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-4 pb-2 border-b border-[#e5e1d9]">
+          <p className="text-xs uppercase tracking-widest font-semibold text-teal-800 mb-5 pb-3 border-b border-[#d5ded9]">
             Experience
           </p>
           <div className="space-y-4">
             {EXPERIENCES.map((exp, idx) => (
               <article key={idx} className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <div className="flex flex-col lg:flex-row lg:items-baseline lg:justify-between gap-1">
                   <h3 className="text-lg tracking-tight text-neutral-900">{exp.role}</h3>
-                  <span className="font-mono text-xs text-neutral-500 shrink-0">{exp.period}</span>
+                  <span className="text-xs text-neutral-500 shrink-0">{exp.period}</span>
                 </div>
                 <p className="mt-1 text-sm text-neutral-600">{exp.company}</p>
               </article>
@@ -74,14 +74,14 @@ const Home: React.FC = () => {
 
       {/* Publications (2 Columns Across Width Directly Below) */}
       <section className="border-b border-[#ddd8cf] pb-8">
-        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-4 pb-2 border-b border-[#e5e1d9]">
+        <p className="text-xs uppercase tracking-widest font-semibold text-teal-800 mb-5 pb-3 border-b border-[#d5ded9]">
           Publications
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {PUBLICATIONS.map((pub, idx) => (
             <article
               key={idx}
-              className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors flex flex-col justify-between"
+              className="rounded-sm border border-[#e3ded5] bg-[#fbfaf7] p-5 flex flex-col justify-between"
             >
               <div>
                 <h3 className="text-lg md:text-xl tracking-tight leading-snug">
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
                 </h3>
                 <p className="mt-2 text-sm text-neutral-600">{pub.authors}</p>
               </div>
-              <p className="mt-3 font-mono text-xs uppercase tracking-wide text-neutral-500">
+              <p className="mt-3 text-xs uppercase tracking-wide text-neutral-500">
                 {pub.venue} • {pub.year}
               </p>
             </article>

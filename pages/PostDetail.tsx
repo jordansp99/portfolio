@@ -161,7 +161,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     return (
       <div className="flex flex-col items-center justify-center py-32 text-center space-y-4">
         <h1 className="text-6xl font-medium text-neutral-900">404</h1>
-        <p className="font-mono text-neutral-500">Content not found</p>
+        <p className="text-neutral-500">Content not found</p>
         <Link to="/" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
           Return Home
         </Link>
@@ -233,7 +233,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       return (
         <h2 id={id} className="text-2xl md:text-3xl font-bold mt-24 mb-10 scroll-mt-24 flex items-start gap-4 md:gap-6 group text-neutral-900 border-t-2 border-neutral-900 pt-12" {...props}>
           {number && (
-            <span className="font-mono text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-1 md:mt-1.5 select-none tracking-tighter">
+            <span className="text-xs text-white bg-neutral-900 px-2.5 py-1.5 shrink-0 mt-1 md:mt-1.5 select-none tracking-tighter">
               {number}
             </span>
           )}
@@ -249,7 +249,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
       return (
         <h3 id={id} className="text-lg md:text-xl font-bold mt-16 mb-6 scroll-mt-24 flex items-start gap-3 md:gap-4 group text-neutral-800" {...props}>
           {number && (
-            <span className="font-mono text-[10px] text-neutral-500 shrink-0 mt-1.5 md:mt-2 select-none tracking-[0.1em] border-b border-neutral-300 pb-0.5">
+            <span className="text-[10px] text-neutral-500 shrink-0 mt-1.5 md:mt-2 select-none tracking-[0.1em] border-b border-neutral-300 pb-0.5">
               {number}
             </span>
           )}
@@ -299,12 +299,12 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             className="group relative block w-full text-left cursor-zoom-in"
           >
             <img className="w-full border border-[#ddd8cf]" {...props} src={resolvedSrc} />
-            <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] font-mono uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
+            <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
               Click to zoom
             </span>
           </button>
           {props.alt && (
-            <figcaption className="text-center text-xs font-mono text-neutral-500 mt-2 uppercase tracking-wide">
+            <figcaption className="text-center text-xs text-neutral-500 mt-2 uppercase tracking-wide">
               {props.alt}
             </figcaption>
           )}
@@ -343,7 +343,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
     <article className="max-w-6xl mx-auto pb-20">
       <Link
         to={listPath}
-        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-blue-700 hover:text-blue-800 transition-colors"
+        className="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-blue-700 hover:text-blue-800 transition-colors"
       >
         <ArrowLeft size={14} />
         Back to {listLabel}
@@ -356,13 +356,13 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
 
             <div className="mt-5 flex flex-wrap items-center gap-4 text-neutral-500">
               {'date' in data && (
-                <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide">
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wide">
                   <Calendar size={13} />
                   {formatDateBritish(data.date)}
                 </div>
               )}
               {'date' in data && (
-                <p className="font-mono text-xs uppercase tracking-wide">
+                <p className="text-xs uppercase tracking-wide">
                   {data.tags[0] ?? 'Post'}{blogYear ? `, ${blogYear}` : ''}
                 </p>
               )}
@@ -380,7 +380,7 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
                 className="group relative block w-full text-left cursor-zoom-in"
               >
                 <img src={resolveAssetUrl(data.imageUrl)} className="w-full h-auto object-cover" alt={data.title} />
-                <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] font-mono uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
+                <span className="absolute right-3 top-3 bg-black/70 text-white text-[10px] uppercase tracking-wide px-2 py-1 opacity-90 group-hover:opacity-100">
                   Click to zoom
                 </span>
               </button>
@@ -436,11 +436,11 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
         {headings.length > 0 && (
           <aside className="hidden lg:block">
             <div className="sticky top-10 border-l border-[#ddd8cf] pl-6">
-              <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Headings</p>
+              <p className="text-xs uppercase tracking-wide text-neutral-500">Headings</p>
               <ul className="mt-4 space-y-3 list-none">
                 {headings.map((heading) => (
                   <li key={heading.slug} className={`flex items-start gap-3 group ${heading.level === 3 ? 'ml-6' : ''}`}>
-                    <span className={`font-mono text-[10px] font-bold mt-1 shrink-0 select-none tracking-widest ${
+                    <span className={`text-[10px] font-bold mt-1 shrink-0 select-none tracking-widest ${
                       heading.level === 3 ? 'text-neutral-400 border-b border-neutral-300' : 'text-neutral-900 border-b border-neutral-900'
                     } pb-0.5`}>
                       {(heading as any).number}

@@ -20,7 +20,7 @@ const Blog: React.FC = () => {
 
       <div className="mt-10 space-y-10">
         {BLOG_POSTS.length === 0 ? (
-          <p className="text-neutral-500 font-mono text-sm">No blog posts published yet.</p>
+          <p className="text-neutral-500 text-sm">No blog posts published yet.</p>
         ) : (
           BLOG_POSTS.map((post) => {
             const year = new Date(post.date).getFullYear();
@@ -34,12 +34,12 @@ const Blog: React.FC = () => {
                   </Link>
                 </h2>
 
-                <p className="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-neutral-500">
+                <p className="mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-wide text-neutral-500">
                   <Calendar size={13} />
                   {formatDateBritish(post.date)}
                 </p>
 
-                <p className="mt-2 font-mono text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
+                <p className="mt-2 text-xs uppercase tracking-wide text-neutral-500">{metaLine}</p>
 
                 <p className="mt-4 text-neutral-700 leading-relaxed max-w-4xl">{post.excerpt}</p>
               </article>
