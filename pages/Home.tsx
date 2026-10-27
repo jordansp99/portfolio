@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { EXPERIENCES, PUBLICATIONS } from '../constants';
 
@@ -110,18 +109,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Explore Section */}
-      <section className="flex items-center justify-between pt-2">
-        <p className="font-mono text-xs uppercase tracking-wide text-neutral-500">Explore</p>
-        <div className="flex items-center gap-6 text-lg">
-          <Link to="/projects" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
-            Projects
-          </Link>
-          <Link to="/blog" className="text-blue-700 underline underline-offset-4 hover:text-blue-800 transition-colors">
-            Blog
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

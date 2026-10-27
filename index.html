@@ -18,10 +18,14 @@
     <script src="https://cdn.tailwindcss.com/plugins/tailwindcss-typography.js"></script>
     <script>
       tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { mono: ['Arial', 'sans-serif'] },
+          },
+        },
         plugins: [require('@tailwindcss/typography')],
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f6f5f2;
@@ -30,7 +34,7 @@
             --line-color: #ddd8cf;
         }
         body {
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
@@ -39,10 +43,13 @@
             overflow-y: scroll;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: Arial, sans-serif;
         }
         .font-mono {
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: Arial, sans-serif;
+        }
+        code, pre {
+            font-family: 'Courier New', monospace;
         }
         article ul {
             list-style-type: disc !important;

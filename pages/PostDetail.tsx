@@ -278,7 +278,8 @@ const PostDetail: React.FC<{ type: 'blog' | 'project' }> = ({ type }) => {
             style={oneDark}
             language={match ? match[1] : 'text'}
             PreTag="div"
-            customStyle={{ margin: 0, padding: '1rem', background: '#111827', fontSize: '0.84rem' }}
+            customStyle={{ margin: 0, padding: '1rem', background: '#111827', fontSize: '0.84rem', fontFamily: "'Courier New', monospace" }}
+            codeTagProps={{ style: { fontFamily: "'Courier New', monospace" } }}
             showLineNumbers={true}
             lineNumberStyle={{ minWidth: '2.2em', paddingRight: '1em', color: '#6b7280', textAlign: 'right' }}
             {...props}
