@@ -69,7 +69,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
           </div>
 
-          <p className="mt-2 text-sm text-neutral-600">PhD Researcher</p>
+          <p className="mt-2 text-sm text-neutral-600">PhD Student</p>
 
           <nav className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex mt-5 flex-col gap-2`}>
             {navLinks.map((link) => {
@@ -131,6 +131,18 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
 
           <div className="mt-6 flex gap-4 text-neutral-500">
+            <a
+              href="https://orcid.org/my-orcid?orcid=0009-0008-0832-6028"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-neutral-900 transition-colors"
+              aria-label="ORCID"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+                <circle cx="9" cy="9" r="9" fill="currentColor" />
+                <text x="9" y="12.7" textAnchor="middle" fill="#f6f5f2" fontFamily="Arial, sans-serif" fontSize="10.5" fontWeight="bold">iD</text>
+              </svg>
+            </a>
             <a
               href="https://github.com/jordansp99"
               target="_blank"

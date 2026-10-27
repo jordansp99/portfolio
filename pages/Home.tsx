@@ -10,11 +10,11 @@ const Home: React.FC = () => {
       <section className="pt-2 md:pt-4 border-b border-[#ddd8cf] pb-8">
         <p className="font-mono text-xs uppercase tracking-wide text-neutral-500 mb-2">Profile</p>
         <h1 className="text-4xl md:text-5xl leading-[1.1] tracking-tight font-normal text-neutral-900">
-          PhD Researcher in Robotics &amp; AI
+          PhD Student in Robotics &amp; AI
         </h1>
         <div className="mt-4 space-y-3 text-neutral-700 leading-relaxed text-base md:text-lg max-w-4xl">
           <p>
-            I am Jordan Speight, a PhD researcher with the RAINZ CDT at the University of Manchester.
+            I am Jordan Speight, a PhD student with the RAINZ CDT at the University of Manchester.
             My doctoral research investigates the techno-economic optimisation of robotic inspection for circular offshore energy assets.
           </p>
         </div>
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             <article className="border-b border-[#e5e1d9] pb-4 pl-4 -ml-4 border-l-2 border-l-transparent hover:border-l-teal-700 transition-colors">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                 <h3 className="text-lg tracking-tight text-neutral-900">MSc. Artificial Intelligence</h3>
-                <span className="font-mono text-xs text-neutral-500 shrink-0">Jan 2025 to Present</span>
+                <span className="font-mono text-xs text-neutral-500 shrink-0">Jan 2025 to Sept 2026</span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">University Of Essex</p>
             </article>
